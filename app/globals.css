@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  
+  /* Brand Palette - Felconis */
+  --color-brand: #1458C3; /* Navy Blue */
+  --color-brand-hover: #11469B;
+  --color-background-dark: #FFFFFF;
+  --color-surface: #F9FAFB;
+  --color-surface-light: #F3F4F6;
+  --color-surface-alt: #E5E7EB;
+  
+  /* Text Palette */
+  --color-text-primary: #0F0F0F;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6B7280;
+  
+  /* UI elements */
+  --color-stroke: #E5E7EB;
+  --color-stroke-active: #1458C3;
+
+  /* Institutional Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.01), 0 2px 4px -1px rgba(0,0,0,0.01);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.03), 0 4px 6px -2px rgba(0,0,0,0.01);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.04), 0 10px 10px -5px rgba(0,0,0,0.02);
+  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.08);
+  --shadow-premium: 0 40px 80px rgba(0,0,0,0.08);
+
+  /* Typography Utilities */
+  --leading-tight-impact: 1.1;
+}
+
+@layer base {
+  :root {
+    --background: #FFFFFF;
+    --foreground: #0F0F0F;
+  }
+
+  body {
+    @apply bg-background-dark text-text-primary font-sans antialiased selection:bg-brand/20 selection:text-brand;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-text-primary;
+  }
+
+  /* Transition Defaults */
+  * {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  /* Corporate Button Styles */
+  .btn-primary {
+    @apply h-12 px-6 bg-brand hover:bg-brand-hover text-white font-bold rounded-lg flex items-center justify-center gap-2 shadow-md shadow-brand/10 transition-all active:scale-[0.98] tracking-tight text-sm;
+  }
+
+  .btn-outline {
+    @apply h-12 px-6 bg-white border border-stroke hover:bg-surface-alt text-text-primary font-bold rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] tracking-tight hover:border-brand/40 text-sm;
+  }
+
+  /* Interactive Utilities */
+  .hover-lift {
+    @apply hover:-translate-y-1 hover:shadow-lg transition-all duration-500;
+  }
+
+  /* Texture */
+  .grain {
+    @apply relative after:content-[''] after:absolute after:inset-0 after:opacity-[0.02] after:pointer-events-none after:bg-[url('https://grainy-gradients.vercel.app/noise.svg')];
+  }
+
+  /* Input & Field Styles */
+  .input-field {
+    @apply w-full h-12 px-4 bg-surface border border-stroke rounded-lg text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-4 focus:ring-brand/5 focus:border-brand transition-all font-medium text-sm;
+  }
+
+  /* Section Utilities - Tightened per user request */
+  .section-padding {
+    @apply py-16 px-6 md:px-12;
+  }
+  
+  .container-max {
+    @apply max-w-7xl mx-auto px-6 md:px-12;
+  }
+}
+
+/* Typography Scale & Polish */
+h1 { @apply text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-8 tracking-tighter; }
+h2 { @apply text-3xl md:text-5xl leading-[1.2] mb-6 tracking-tight; }
+h3 { @apply text-xl md:text-2xl leading-[1.3] mb-4 tracking-tight; }
+p { @apply text-base md:text-lg text-text-secondary leading-relaxed font-normal; }
+
+/* Scrollbar Polish */
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+::-webkit-scrollbar-track {
+  @apply bg-gray-50;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-200 hover:bg-gray-300 transition-colors rounded-full;
+}

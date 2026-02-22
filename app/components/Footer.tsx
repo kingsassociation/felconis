@@ -1,0 +1,86 @@
+import { Facebook, Linkedin } from "lucide-react";
+import Link from "next/link";
+import Logo from "./Logo";
+
+export default function Footer() {
+  return (
+    <footer className="bg-white border-t border-stroke pt-16 pb-12 px-6 grain relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-brand/[0.01] rounded-full blur-[100px] -z-10" />
+      <div className="container-max">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-x-12 gap-y-12 mb-16">
+          <div className="md:col-span-4 lg:col-span-5 space-y-8">
+            <Link href="/" className="flex items-center gap-2 group origin-left">
+              <Logo />
+            </Link>
+            <p className="text-text-muted text-base leading-relaxed max-w-sm font-medium">
+              A professional digital engineering firm delivering high-precision software solutions and strategic design for global organizations.
+            </p>
+            <div className="flex gap-4">
+                <a href="#" className="w-10 h-10 bg-white border border-stroke rounded-lg flex items-center justify-center text-text-muted hover:text-brand hover:border-brand/40 transition-all shadow-sm group/social">
+                  <Linkedin size={18} strokeWidth={1.5} className="group-hover/social:scale-110 transition-transform" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-white border border-stroke rounded-lg flex items-center justify-center text-text-muted hover:text-brand hover:border-brand/40 transition-all shadow-sm group/social">
+                  <Facebook size={18} strokeWidth={1.5} className="group-hover/social:scale-110 transition-transform" />
+                </a>
+            </div>
+          </div>
+          
+          <div className="md:col-span-2 lg:col-span-2 space-y-6">
+            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Institutional</h4>
+            <ul className="space-y-4">
+              <li><Link href="/services" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                 Capabilities
+              </Link></li>
+              <li><Link href="/work" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                 Case Archive
+              </Link></li>
+              <li><Link href="/blog" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                 Intelligence
+              </Link></li>
+              <li><Link href="/about" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                 Organization
+              </Link></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-2 lg:col-span-2 space-y-6">
+            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Gateway</h4>
+            <ul className="space-y-4">
+              <li><Link href="/careers" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                 Open Nodes
+              </Link></li>
+              <li><Link href="/contact" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                 Direct Sync
+              </Link></li>
+               <li><Link href="/partner" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                  Partner Board
+               </Link></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-4 lg:col-span-3 space-y-6">
+            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Global Presence</h4>
+            <div className="space-y-6">
+              <div className="space-y-1">
+                 <p className="text-[9px] font-black text-text-primary uppercase tracking-widest">Main Hub</p>
+                 <p className="text-[11px] font-black uppercase tracking-tight text-text-muted">Dhaka, Bangladesh</p>
+              </div>
+              <div className="space-y-1">
+                 <p className="text-[9px] font-black text-text-primary uppercase tracking-widest">Information Stream</p>
+                 <a href="mailto:hello@felconis.com" className="text-[11px] font-black text-brand hover:underline tracking-tight">HELLO@FELCONIS.COM</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="pt-8 border-t border-stroke flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">© 2026 Felconis Organization. All Rights Reserved.</p>
+          <div className="flex gap-8 text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">
+            <a href="#" className="hover:text-brand transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-brand transition-colors">Terms of Use</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
