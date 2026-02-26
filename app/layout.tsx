@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
+import CookieConsent from "./components/CookieConsent";
+import FacebookPixel from "./components/FacebookPixel";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,6 +26,8 @@ export default function RootLayout({
         className={`${inter.variable} antialiased`}
       >
         <Toaster position="top-center" expand visibleToasts={3} richColors />
+        <FacebookPixel />
+        <CookieConsent />
         {children}
       </body>
     </html>

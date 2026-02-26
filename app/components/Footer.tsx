@@ -16,10 +16,28 @@ export default function Footer() {
               A professional digital engineering firm delivering high-precision software solutions and strategic design for global organizations.
             </p>
             <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 bg-white border border-stroke rounded-lg flex items-center justify-center text-text-muted hover:text-brand hover:border-brand/40 transition-all shadow-sm group/social">
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+                      window.fbq('trackCustom', 'SocialClick', { platform: 'LinkedIn' });
+                    }
+                  }}
+                  className="w-10 h-10 bg-white border border-stroke rounded-lg flex items-center justify-center text-text-muted hover:text-brand hover:border-brand/40 transition-all shadow-sm group/social"
+                >
                   <Linkedin size={18} strokeWidth={1.5} className="group-hover/social:scale-110 transition-transform" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-white border border-stroke rounded-lg flex items-center justify-center text-text-muted hover:text-brand hover:border-brand/40 transition-all shadow-sm group/social">
+                <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+                      window.fbq('trackCustom', 'SocialClick', { platform: 'Facebook' });
+                    }
+                  }}
+                  className="w-10 h-10 bg-white border border-stroke rounded-lg flex items-center justify-center text-text-muted hover:text-brand hover:border-brand/40 transition-all shadow-sm group/social"
+                >
                   <Facebook size={18} strokeWidth={1.5} className="group-hover/social:scale-110 transition-transform" />
                 </a>
             </div>
@@ -44,40 +62,50 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-2 lg:col-span-2 space-y-6">
-            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Gateway</h4>
+            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Connect</h4>
             <ul className="space-y-4">
               <li><Link href="/careers" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
-                 Open Nodes
+                 Careers
               </Link></li>
               <li><Link href="/contact" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
-                 Direct Sync
+                 Contact Us
               </Link></li>
                <li><Link href="/partner" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
-                  Partner Board
+                  Partnerships
                </Link></li>
             </ul>
           </div>
 
           <div className="md:col-span-4 lg:col-span-3 space-y-6">
-            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Global Presence</h4>
+            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Headquarters</h4>
             <div className="space-y-6">
               <div className="space-y-1">
-                 <p className="text-[9px] font-black text-text-primary uppercase tracking-widest">Main Hub</p>
-                 <p className="text-[11px] font-black uppercase tracking-tight text-text-muted">Dhaka, Bangladesh</p>
+                 <p className="text-[9px] font-black text-text-primary uppercase tracking-widest">Office Location</p>
+                 <p className="text-[11px] font-black uppercase tracking-tight text-text-muted">Chattogram, Bangladesh</p>
               </div>
               <div className="space-y-1">
-                 <p className="text-[9px] font-black text-text-primary uppercase tracking-widest">Information Stream</p>
-                 <a href="mailto:hello@felconis.com" className="text-[11px] font-black text-brand hover:underline tracking-tight">HELLO@FELCONIS.COM</a>
+                 <p className="text-[9px] font-black text-text-primary uppercase tracking-widest">General Inquiries</p>
+                 <a 
+                  href="mailto:hello@felconis.com" 
+                  onClick={() => {
+                    if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+                      window.fbq('track', 'Contact', { content_name: 'Email' });
+                    }
+                  }}
+                  className="text-[11px] font-black text-brand hover:underline tracking-tight"
+                >
+                  HELLO@FELCONIS.COM
+                </a>
               </div>
             </div>
           </div>
         </div>
         
         <div className="pt-8 border-t border-stroke flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">© 2026 Felconis Organization. All Rights Reserved.</p>
+          <p className="text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">© 2026 Felconi. All Rights Reserved.</p>
           <div className="flex gap-8 text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">
-            <a href="#" className="hover:text-brand transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-brand transition-colors">Terms of Use</a>
+            <Link href="/legal/privacy" className="hover:text-brand transition-colors">Privacy Policy</Link>
+            <Link href="/legal/terms" className="hover:text-brand transition-colors">Terms of Use</Link>
           </div>
         </div>
       </div>

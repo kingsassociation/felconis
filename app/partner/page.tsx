@@ -13,6 +13,7 @@ import {
     Video,
     Zap
 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import Footer from "../components/Footer";
@@ -76,6 +77,12 @@ export default function PartnerPage() {
 
             const result = await response.json();
             setProtocolId(result.protocolId);
+            
+            // Meta Pixel Tracking
+      if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+        window.fbq('track', 'CompleteRegistration');
+      }
+
             toast.success("Institutional Admission Protocol Initiated.");
             (e.target as HTMLFormElement).reset();
         } catch (error: any) {
@@ -233,7 +240,7 @@ export default function PartnerPage() {
                                         <div className="flex items-start gap-1">
                                             <span className="text-2xl font-black text-brand mt-2 leading-none">৳</span>
                                             <div className="flex flex-col">
-                                                <span className="text-7xl font-black tracking-tighter text-text-primary leading-none">5,000</span>
+                                                <span className="text-7xl font-black tracking-tighter text-text-primary leading-none">7,000</span>
                                                 <span className="text-[9px] font-black uppercase tracking-widest text-brand mt-1">BDT / ANNUAL PROTOCOL</span>
                                             </div>
                                         </div>
@@ -403,13 +410,13 @@ export default function PartnerPage() {
                                                 <label className="flex items-start gap-3 cursor-pointer group">
                                                     <input required type="checkbox" className="mt-1 w-4 h-4 rounded border-stroke text-brand focus:ring-brand" />
                                                     <span className="text-[10px] text-text-muted font-medium leading-relaxed group-hover:text-text-primary transition-colors">
-                                                        I acknowledge the annual protocol activation fee of 5,000 BDT is required for active executive status.
+                                                        I acknowledge the annual protocol activation fee of 7,000 BDT is required for active executive status.
                                                     </span>
                                                 </label>
-                                                <label className="flex items-start gap-3 cursor-pointer group">
+                                                 <label className="flex items-start gap-3 cursor-pointer group">
                                                     <input required type="checkbox" className="mt-1 w-4 h-4 rounded border-stroke text-brand focus:ring-brand" />
                                                     <span className="text-[10px] text-text-muted font-medium leading-relaxed group-hover:text-text-primary transition-colors">
-                                                        I agree to the institutional partner guidelines and professional code of conduct.
+                                                        I agree to the <Link href="/legal/guidelines" className="text-brand hover:underline">institutional partner guidelines</Link> and professional code of conduct.
                                                     </span>
                                                 </label>
                                             </div>

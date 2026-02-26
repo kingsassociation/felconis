@@ -39,6 +39,11 @@ export default function ContactPage() {
 
       if (!response.ok) throw new Error("Sync Failed");
       
+      // Meta Pixel Tracking
+      if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+        window.fbq('track', 'Contact');
+      }
+
       toast.success("Inquiry Synchronized. A growth architect will reach out shortly.");
       (e.target as HTMLFormElement).reset();
     } catch (err) {
@@ -97,7 +102,7 @@ export default function ContactPage() {
                 <ContactInfo 
                   icon={MapPin} 
                   title="Operations Hub" 
-                  value="Dhaka, Bangladesh" 
+                  value="Chattogram, Bangladesh" 
                   desc="Strategic Engineering Headquarters." 
                 />
               </div>

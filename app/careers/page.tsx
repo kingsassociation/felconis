@@ -10,7 +10,7 @@ import {
    Zap
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -46,6 +46,22 @@ const JOBS = [
 
 export default function CareersPage() {
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+      window.fbq('track', 'ViewContent', { content_name: 'Careers' });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!searchQuery) return;
+    const timeoutId = setTimeout(() => {
+      if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+        window.fbq('track', 'Search', { search_string: searchQuery });
+      }
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery]);
 
   const filteredJobs = JOBS.filter(job => 
     job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -111,7 +127,18 @@ export default function CareersPage() {
                        viewport={{ once: true }}
                        transition={{ delay: i * 0.1, duration: 0.8 }}
                     >
-                       <Link href={`/careers/${job.id}`} className="group block">
+                       <Link 
+                           href={`/careers/${job.id}`} 
+                           onClick={() => {
+                              if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+                                 window.fbq('track', 'Lead', { 
+                                    content_name: job.title, 
+                                    content_category: 'Job Openings' 
+                                 });
+                              }
+                           }}
+                           className="group block"
+                        >
                           <div className="p-8 bg-surface border border-stroke rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-8 hover:border-brand/40 transition-colors">
                              <div className="space-y-3">
                                 <div className="flex flex-wrap gap-3">

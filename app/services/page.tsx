@@ -19,6 +19,11 @@ import Navbar from "../components/Navbar";
 
 export default function ServicesPage() {
   useEffect(() => {
+    // Track Meta Pixel ViewContent only if consent is allowed
+    if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+      window.fbq('track', 'ViewContent', { content_name: 'Services' });
+    }
+
     // Handle initial hash on load
     const hash = window.location.hash;
     if (hash) {
@@ -260,7 +265,18 @@ function DetailBlock({ title, desc, bullets, slug }: any) {
              </li>
           ))}
        </ul>
-       <Link href={`/services/${slug}`} className="inline-flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-brand group/link pt-2 hover:translate-x-1 transition-transform">
+       <Link 
+          href={`/services/${slug}`} 
+          onClick={() => {
+            if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+              window.fbq('track', 'ViewContent', { 
+                content_name: title, 
+                content_category: 'Capabilities' 
+              });
+            }
+          }}
+          className="inline-flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-brand group/link pt-2 hover:translate-x-1 transition-transform"
+        >
           Capability Details <ArrowRight size={12} />
        </Link>
     </div>

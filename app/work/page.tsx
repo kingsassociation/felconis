@@ -9,7 +9,7 @@ import {
    Zap
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -47,6 +47,12 @@ const CATEGORIES = ["All", "E-commerce", "SaaS", "Logistics", "Fintech"];
 
 export default function WorkPage() {
   const [activeCategory, setActiveCategory] = useState("All");
+
+  useEffect(() => {
+    if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+      window.fbq('track', 'ViewContent', { content_name: 'Portfolio' });
+    }
+  }, []);
 
   const filteredStudies = activeCategory === "All" 
     ? CASE_STUDIES 
@@ -144,9 +150,20 @@ export default function WorkPage() {
                              </p>
                           </div>
                           
-                          <Link href={`/work/${study.slug}`} className="btn-primary h-14 inline-flex items-center px-10 text-[10px] font-black uppercase tracking-widest bg-brand rounded-xl">
-                             Access Protocol <ArrowRight size={14} className="ml-3 group-hover:translate-x-1 transition-transform" />
-                          </Link>
+                           <Link 
+                              href={`/work/${study.slug}`} 
+                              onClick={() => {
+                                 if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
+                                    window.fbq('track', 'ViewContent', { 
+                                       content_name: study.title, 
+                                       content_category: 'Case Studies' 
+                                    });
+                                 }
+                              }}
+                              className="btn-primary h-14 inline-flex items-center px-10 text-[10px] font-black uppercase tracking-widest bg-brand rounded-xl"
+                           >
+                              Access Protocol <ArrowRight size={14} className="ml-3 group-hover:translate-x-1 transition-transform" />
+                           </Link>
                        </div>
                     </motion.div>
                  ))}
