@@ -13,6 +13,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Felconis | Institutional Digital Engineering",
   description: "Global digital engineering firm specializing in high-precision software systems and strategic organizational scaling.",
+  other: {
+    "facebook-domain-verification": "2kby8y0ggs4v7eypy43zte2vnls70w",
+  },
 };
 
 export default function RootLayout({
