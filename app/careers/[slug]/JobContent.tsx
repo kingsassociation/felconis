@@ -33,10 +33,30 @@ export default function JobContent({ slug, job }: JobContentProps) {
     }
   }, [slug, job.title]);
 
-  const handleApply = (e: React.FormEvent) => {
+  const handleApply = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    
+    //@ts-ignore
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      portfolio: formData.get("portfolio"),
+      message: formData.get("message"),
+      jobId: job.id,
+      resume: formData.get("portfolio"), // Using portfolio as resume link for now based on form structure
+    };
+
+    try {
+      const response = await fetch("/api/application", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error("Submission failed");
+
       // Track Lead event
       if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
         window.fbq('track', 'Lead', { 
@@ -46,10 +66,13 @@ export default function JobContent({ slug, job }: JobContentProps) {
       }
       
       toast.success("Application Signal Received. Our talent board will audit your status.");
-      setIsSubmitting(false);
       //@ts-ignore
       e.target.reset();
-    }, 1500);
+    } catch (err) {
+      toast.error("Process error. Please retry submission.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -164,22 +187,26 @@ export default function JobContent({ slug, job }: JobContentProps) {
                            <p className="text-[10px] font-black uppercase tracking-widest text-brand">Institutional Gateway</p>
                            <h3 className="text-3xl font-black uppercase tracking-tight leading-[0.9]">BROADCAST <br /> <span className="text-brand">IDENTITY.</span></h3>
                            <p className="text-text-muted text-sm font-medium leading-relaxed">
-                               Submit your technical profile to the Felconis executive board today.
+                              Submit your technical profile to the Felconis executive board today.
                            </p>
                         </div>
 
                         <form onSubmit={handleApply} className="space-y-8">
                            <div className="space-y-2">
                               <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Full Identity</label>
-                              <input required type="text" placeholder="Engineering Name" className="input-field h-12 text-[11px] font-bold uppercase" />
+                              <input required name="name" type="text" placeholder="Engineering Name" className="input-field h-12 text-[11px] font-bold uppercase" />
+                           </div>
+                           <div className="space-y-2">
+                              <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Official Email</label>
+                              <input required name="email" type="email" placeholder="Email Address" className="input-field h-12 text-[11px] font-bold uppercase" />
                            </div>
                            <div className="space-y-2">
                               <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Strategic Link (Portfolios)</label>
-                              <input required type="url" placeholder="https://..." className="input-field h-12 text-[11px] font-bold uppercase" />
+                              <input required name="portfolio" type="url" placeholder="https://..." className="input-field h-12 text-[11px] font-bold uppercase" />
                            </div>
                            <div className="space-y-4">
                               <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Capability Statement</label>
-                              <textarea required rows={4} placeholder="Why should you join the growth board?" className="input-field h-auto py-4 resize-none text-[11px] font-bold uppercase" />
+                              <textarea required name="message" rows={4} placeholder="Why should you join the growth board?" className="input-field h-auto py-4 resize-none text-[11px] font-bold uppercase" />
                            </div>
                            
                            <button disabled={isSubmitting} type="submit" className="h-14 bg-brand text-white w-full text-[10px] font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-brand/10 group">

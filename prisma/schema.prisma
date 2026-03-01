@@ -43,10 +43,14 @@ model CaseStudy {
   title        String
   slug         String   @unique
   clientName   String?
+  tag          String?  // E-commerce, SaaS, etc.
+  stats        String?  // +220%, 3.2x, etc.
+  kpi          String?  // Revenue Acceleration, etc.
+  duration     String?
   problem      String
   strategy     String
-  execution    String
-  results      String
+  execution    String[] // Changed to String[]
+  results      String[] // Changed to String[]
   image        String?
   technologies String[]
   createdAt    DateTime @default(now())
@@ -56,7 +60,10 @@ model Job {
   id               String        @id @default(cuid())
   title            String
   slug             String        @unique
-  description      String
+  department       String?
+  overview         String?
+  description      String        // General description/main content
+  salary           String?
   responsibilities String[]
   requirements     String[]
   benefits         String[]
@@ -107,6 +114,8 @@ model Lead {
   company   String?
   message   String
   status    String   @default("NEW")
+  partnerId String?
+  partner   Partner? @relation(fields: [partnerId], references: [id])
   createdAt DateTime @default(now())
 }
 
@@ -114,23 +123,41 @@ model Service {
   id          String   @id @default(cuid())
   title       String
   slug        String   @unique
+  subtitle    String?
   description String
+  image       String?
   icon        String?
   category    String   // SOFTWARE, MARKETING, AI
+  highlights  Json?    // Array of objects { title, desc }
   features    String[]
 }
 
-
 model Partner {
-  id         String   @id @default(cuid())
-  name       String
-  email      String   @unique
-  phone      String
-  whatsapp   String?
-  portfolio  String?
-  social     String?
-  skills     String?
-  experience String?
-  status     String   @default("PENDING")
-  createdAt  DateTime @default(now())
+  id             String   @id @default(cuid())
+  name           String
+  email          String   @unique
+  password       String?  // Added for Portal Access
+  phone          String
+  whatsapp       String?
+  portfolio      String?
+  social         String?
+  skills         String?
+  experience     String?
+  status         String   @default("PENDING")
+  commissionRate Float?   @default(10.0)
+  totalEarned    Float?   @default(0.0)
+  leads          Lead[]
+  createdAt      DateTime @default(now())
+}
+
+model Asset {
+  id        String   @id @default(cuid())
+  title     String
+  category  String   // BRAND_KIT, PRESENTATION, SPECIFICATION
+  size      String
+  type      String   // ZIP, PDF
+  url       String
+  status    String   @default("PUBLISHED")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

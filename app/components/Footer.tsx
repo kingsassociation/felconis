@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-brand/[0.01] rounded-full blur-[100px] -z-10" />
       <div className="container-max">
         <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-x-12 gap-y-12 mb-16">
-          <div className="md:col-span-4 lg:col-span-5 space-y-8">
+          <div className="md:col-span-4 lg:col-span-4 space-y-8">
             <Link href="/" className="flex items-center gap-2 group origin-left">
               <Logo />
             </Link>
@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
                 <a 
-                  href="#" 
+                  href="https://www.linkedin.com/company/felconis" 
                   onClick={(e) => {
                     e.preventDefault();
                     if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
@@ -29,7 +29,7 @@ export default function Footer() {
                   <Linkedin size={18} strokeWidth={1.5} className="group-hover/social:scale-110 transition-transform" />
                 </a>
                 <a 
-                  href="#" 
+                  href="https://www.facebook.com/felconis" 
                   onClick={(e) => {
                     e.preventDefault();
                     if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
@@ -76,22 +76,25 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-4 lg:col-span-3 space-y-6">
-            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Headquarters</h4>
+          <div className="md:col-span-2 lg:col-span-2 space-y-6">
+            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Portals</h4>
+            <ul className="space-y-4">
+              <li><Link href="/admin" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                 Executive Hub
+              </Link></li>
+              <li><Link href="/partner/portal" className="text-[10px] font-black text-text-muted hover:text-brand transition-colors uppercase tracking-widest block">
+                 Partner Portal
+              </Link></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-4 lg:col-span-2 space-y-6">
+            <h4 className="text-[10px] font-black text-brand uppercase tracking-[0.2em]">Contact</h4>
             <div className="space-y-6">
-              <div className="space-y-1">
-                 <p className="text-[9px] font-black text-text-primary uppercase tracking-widest">Office Location</p>
-                 <p className="text-[11px] font-black uppercase tracking-tight text-text-muted">Chattogram, Bangladesh</p>
-              </div>
               <div className="space-y-1">
                  <p className="text-[9px] font-black text-text-primary uppercase tracking-widest">General Inquiries</p>
                  <a 
                   href="mailto:hello@felconis.com" 
-                  onClick={() => {
-                    if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
-                      window.fbq('track', 'Contact', { content_name: 'Email' });
-                    }
-                  }}
                   className="text-[11px] font-black text-brand hover:underline tracking-tight"
                 >
                   HELLO@FELCONIS.COM
@@ -102,7 +105,7 @@ export default function Footer() {
         </div>
         
         <div className="pt-8 border-t border-stroke flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">© 2026 Felconi. All Rights Reserved.</p>
+          <p className="text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">© 2026 Felconis. All Rights Reserved.</p>
           <div className="flex gap-8 text-[9px] text-text-muted font-bold uppercase tracking-widest opacity-60">
             <Link href="/legal/privacy" className="hover:text-brand transition-colors">Privacy Policy</Link>
             <Link href="/legal/terms" className="hover:text-brand transition-colors">Terms of Use</Link>

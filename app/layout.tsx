@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Public_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 import CookieConsent from "./components/CookieConsent";
 import FacebookPixel from "./components/FacebookPixel";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const publicSans = Public_Sans({
+  variable: "--font-public-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} antialiased`}
+        className={`${publicSans.variable} antialiased font-sans`}
       >
         <Toaster position="top-center" expand visibleToasts={3} richColors />
         <FacebookPixel />

@@ -1,5 +1,6 @@
 "use client";
 
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import { motion } from "framer-motion";
 import { Calendar, TrendingUp, User } from "lucide-react";
 import Link from "next/link";
@@ -81,7 +82,7 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
               transition={{ delay: 0.5, duration: 0.8 }}
               className="aspect-[4/3] md:aspect-[21/9] rounded-3xl overflow-hidden border border-stroke shadow-lg group relative"
             >
-               <img src={post.image} alt={post.title} className="w-full h-full object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000" />
+               <img src={getCloudinaryUrl(post.image)} alt={post.title} className="w-full h-full object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000" />
                <div className="absolute inset-0 bg-brand/[0.01]" />
             </motion.div>
           </header>

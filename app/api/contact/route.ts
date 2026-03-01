@@ -1,4 +1,4 @@
-// import prisma from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -14,8 +14,7 @@ export async function POST(req: Request) {
             );
         }
 
-        // Save to NeonDB via Prisma (Disabled for UI-only deploy)
-        /*
+        // Save to Database via Prisma
         const lead = await prisma.lead.create({
             data: {
                 name,
@@ -25,14 +24,11 @@ export async function POST(req: Request) {
                 status: "NEW"
             }
         });
-        */
-
-        console.log("Lead Received (UI-Only Mode):", { name, email });
 
         return NextResponse.json({
             success: true,
             message: "Growth Sync Initialized Successfully",
-            syncId: "mock-sync-id-" + Date.now(),
+            protocolId: lead.id,
         });
     } catch (error) {
         console.error("Contact API Error:", error);

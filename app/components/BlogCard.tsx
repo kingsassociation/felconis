@@ -1,70 +1,60 @@
+"use client";
+
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, User } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import Link from "next/link";
-import React from 'react';
 
 interface BlogCardProps {
-  title: string;
-  excerpt: string;
-  category: string;
-  author: string;
-  date: string;
-  slug: string;
-  image: string;
+  post: {
+    title: string;
+    slug: string;
+    image?: string | null;
+    category: { name: string };
+    date: string;
+    excerpt?: string;
+  };
+  index: number;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ title, excerpt, category, author, date, slug, image }) => {
+const BlogCard = ({ post, index }: BlogCardProps) => {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 10 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="group space-y-6"
+      className="group"
     >
-      <div className="aspect-[16/10] bg-white border border-stroke rounded-2xl overflow-hidden relative shadow-sm transition-all duration-700 hover:border-brand/40">
-        <img 
-          src={image} 
-          alt={title} 
-          className="w-full h-full object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000" 
-        />
-        <div className="absolute inset-0 bg-brand/[0.01]" />
-        <div className="absolute top-4 left-4">
-          <span className="px-3 py-1 bg-white/90 backdrop-blur-md border border-stroke text-brand text-[8px] font-black uppercase tracking-widest rounded-md shadow-sm">
-            {category}
-          </span>
+      <Link href={`/blog/${post.slug}`} className="block space-y-6">
+        <div className="aspect-[16/10] rounded-[2rem] overflow-hidden border border-stroke bg-surface relative group-hover:border-brand/40 transition-all duration-700">
+           {post.image ? (
+             <img src={getCloudinaryUrl(post.image)} alt={post.title} className="w-full h-full object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" />
+           ) : (
+             <div className="w-full h-full bg-brand/5 flex items-center justify-center text-brand opacity-20">
+                <ArrowRight size={48} />
+             </div>
+           )}
+           <div className="absolute inset-0 bg-brand/5" />
         </div>
-      </div>
-      
-      <div className="space-y-4">
-        <div className="space-y-2">
-           <h3 className="text-2xl font-black tracking-tight leading-tight group-hover:text-brand transition-colors uppercase">
-             {title}
+        
+        <div className="space-y-4 px-2">
+           <div className="flex items-center gap-3">
+              <span className="text-[9px] font-black uppercase tracking-widest text-brand">{post.category.name}</span>
+              <span className="w-1 h-1 bg-stroke rounded-full" />
+              <div className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-text-muted">
+                 <Calendar size={12} className="text-brand/40" />
+                 {post.date}
+              </div>
+           </div>
+           <h3 className="text-2xl font-black uppercase tracking-tight group-hover:text-brand transition-colors duration-500 leading-none">
+             {post.title}
            </h3>
-           <p className="text-text-muted text-sm font-medium leading-relaxed line-clamp-2">
-             {excerpt}
+           <p className="text-[11px] font-black uppercase tracking-widest text-text-muted leading-relaxed line-clamp-2">
+             {post.excerpt}
            </p>
         </div>
-
-        <div className="flex items-center justify-between pt-4 border-t border-stroke">
-          <div className="flex items-center gap-4 text-[9px] font-black text-text-muted uppercase tracking-widest">
-            <div className="flex items-center gap-1.5">
-              <User size={12} className="text-brand/40" />
-              {author}
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Calendar size={12} className="text-brand/40" />
-              {date}
-            </div>
-          </div>
-          <Link 
-            href={`/blog/${slug}`} 
-            className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-brand hover:opacity-70 transition-opacity"
-          >
-            Access <ArrowRight size={12} />
-          </Link>
-        </div>
-      </div>
+      </Link>
     </motion.div>
   );
 };

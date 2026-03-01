@@ -1,5 +1,6 @@
 "use client";
 
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import { motion } from "framer-motion";
 import {
     ArrowLeft,
@@ -38,7 +39,7 @@ export default function WorkContent({ slug, study }: WorkContentProps) {
         <section className="relative py-20 overflow-hidden border-b border-stroke">
           <div className="absolute inset-0 -z-10">
              <img 
-               src={study.image} 
+               src={getCloudinaryUrl(study.image)} 
                alt={study.title} 
                className="absolute inset-0 w-full h-full object-cover grayscale opacity-20" 
             />
