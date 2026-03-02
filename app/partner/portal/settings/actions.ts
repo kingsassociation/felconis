@@ -12,6 +12,7 @@ export async function updatePartnerProfile(formData: FormData) {
     }
 
     const name = formData.get("name") as string;
+    const image = formData.get("image") as string;
     const phone = formData.get("phone") as string;
     const whatsapp = formData.get("whatsapp") as string;
     const portfolio = formData.get("portfolio") as string;
@@ -21,6 +22,7 @@ export async function updatePartnerProfile(formData: FormData) {
     try {
         const data: any = {
             name,
+            image,
             phone,
             whatsapp,
             portfolio,

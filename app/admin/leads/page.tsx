@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { Mail, Phone, Trash2 } from "lucide-react";
-import { deleteLead, updateLeadStatus } from "./actions";
+import { deleteLead, updateLeadStatusAction } from "./actions";
 
 export default async function AdminLeadsPage() {
   const leads = await prisma.lead.findMany({
@@ -57,11 +57,7 @@ export default async function AdminLeadsPage() {
                         <p className="text-[9px] font-brand tracking-widest text-text-muted mt-2">{new Date(lead.createdAt).toLocaleDateString()} | INCOMING SIGNAL</p>
                      </td>
                      <td className="px-10 py-8 text-center">
-                        <form action={async (formData) => {
-                          "use server";
-                          const status = formData.get("status") as string;
-                          await updateLeadStatus(lead.id, status);
-                        }}>
+                        <form action={updateLeadStatusAction.bind(null, lead.id)}>
                            <select 
                              name="status"
                              defaultValue={lead.status}
@@ -77,10 +73,7 @@ export default async function AdminLeadsPage() {
                         </form>
                      </td>
                      <td className="px-10 py-8 text-right pr-12">
-                        <form action={async () => {
-                          "use server";
-                          await deleteLead(lead.id);
-                        }}>
+                        <form action={deleteLead.bind(null, lead.id)}>
                            <button className="w-10 h-10 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center ml-auto">
                               <Trash2 size={16} />
                            </button>

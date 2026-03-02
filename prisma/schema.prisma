@@ -11,6 +11,7 @@ model User {
   email     String   @unique
   password  String
   name      String?
+  image     String?  // Added for Avatar Protocol
   role      String   @default("ADMIN")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -137,6 +138,7 @@ model Partner {
   name           String
   email          String   @unique
   password       String?  // Added for Portal Access
+  image          String?  // Added for Avatar Protocol
   phone          String
   whatsapp       String?
   portfolio      String?

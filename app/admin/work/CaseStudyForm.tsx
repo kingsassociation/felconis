@@ -1,8 +1,8 @@
 "use client";
 
-import { getCloudinaryUrl } from "@/lib/cloudinary";
+import CloudinaryAssetInput from "@/app/components/CloudinaryAssetInput";
 import { motion } from "framer-motion";
-import { Briefcase, FileText, Save, Target, X } from "lucide-react";
+import { Briefcase, Save, Target, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { upsertCaseStudy } from "./actions";
@@ -14,7 +14,6 @@ interface CaseStudyFormProps {
 export default function CaseStudyForm({ initialData }: CaseStudyFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [imageUrl, setImageUrl] = useState(initialData?.image || "");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -159,33 +158,12 @@ export default function CaseStudyForm({ initialData }: CaseStudyFormProps) {
                 <h3 className="text-xs font-brand tracking-widest">VISUAL ASSET</h3>
              </div>
 
-             <div className="space-y-6">
-                <div className="aspect-video w-full rounded-xl bg-surface border border-stroke overflow-hidden relative group">
-                   {imageUrl ? (
-                     <img 
-                       src={getCloudinaryUrl(imageUrl)} 
-                       alt="Preview" 
-                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                     />
-                   ) : (
-                     <div className="w-full h-full flex flex-col items-center justify-center text-text-muted gap-2">
-                        <FileText size={24} />
-                        <span className="text-[8px] font-brand tracking-widest">ASSET PENDING</span>
-                     </div>
-                   )}
-                </div>
-
-                <div className="space-y-3">
-                   <label className="text-[9px] font-brand tracking-widest text-text-muted">ASSET CLOUD URL</label>
-                   <input 
-                     name="image" 
-                     value={imageUrl}
-                     onChange={(e) => setImageUrl(e.target.value)}
-                     placeholder="HTTPS://CLOUDINARY.COM/..."
-                     className="w-full h-12 bg-surface border border-stroke rounded-xl px-4 text-[10px] font-bold uppercase tracking-widest focus:border-brand outline-none transition-all"
-                   />
-                </div>
-             </div>
+             <CloudinaryAssetInput 
+               label="Asset Cloud URL"
+               name="image"
+               defaultValue={initialData?.image || ""}
+               aspectRatio="video"
+             />
           </div>
         </aside>
       </div>

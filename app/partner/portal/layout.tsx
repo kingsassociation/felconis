@@ -11,7 +11,7 @@ export default async function PartnerLayout({ children }: { children: React.Reac
 
   const partner = await prisma.partner.findUnique({
     where: { id: session.id },
-    select: { name: true }
+    select: { name: true, image: true }
   });
 
   if (!partner) {
@@ -19,7 +19,7 @@ export default async function PartnerLayout({ children }: { children: React.Reac
   }
 
   return (
-    <PartnerLayoutClient partner={{ name: partner.name }}>
+    <PartnerLayoutClient partner={partner as any}>
       {children}
     </PartnerLayoutClient>
   );

@@ -11,7 +11,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   const admin = await prisma.user.findUnique({
     where: { id: session.id },
-    select: { name: true }
+    select: { name: true, image: true }
   });
 
   if (!admin) {
@@ -19,7 +19,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <AdminLayoutClient admin={admin}>
+    <AdminLayoutClient admin={admin as any}>
       {children}
     </AdminLayoutClient>
   );

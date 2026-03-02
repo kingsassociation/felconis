@@ -1,7 +1,7 @@
 "use client";
 
-import { getCloudinaryUrl } from "@/lib/cloudinary";
-import { Image as ImageIcon, Link as LinkIcon, Save, Shield, User, X } from "lucide-react";
+import CloudinaryAssetInput from "@/app/components/CloudinaryAssetInput";
+import { Link as LinkIcon, Save, Shield, User, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -10,7 +10,6 @@ import { upsertTeamMember } from "../actions";
 export default function TeamForm({ member }: { member?: any }) {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
-  const [imageUrl, setImageUrl] = useState(member?.image || "");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -102,38 +101,16 @@ export default function TeamForm({ member }: { member?: any }) {
          <aside className="lg:col-span-4 space-y-10">
             <div className="bg-surface border border-stroke rounded-[2rem] p-8 space-y-10">
                <div className="flex items-center gap-4 text-brand">
-                  <ImageIcon size={20} />
+                  <User size={20} />
                   <h3 className="text-xs font-brand tracking-widest">VISUAL ASSET</h3>
                </div>
 
-               <div className="space-y-6">
-                  <div className="aspect-[4/5] w-full rounded-2xl bg-white border border-stroke overflow-hidden relative group shadow-sm">
-                     {imageUrl ? (
-                        <img 
-                           src={getCloudinaryUrl(imageUrl)} 
-                           alt="Preview" 
-                           className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0"
-                        />
-                     ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center text-text-muted/30 gap-4">
-                           <User size={64} />
-                           <span className="text-[8px] font-brand tracking-widest text-center">ASSET PENDING<br/>SYNCHRONIZATION</span>
-                        </div>
-                     )}
-                  </div>
-
-                  <div className="space-y-4">
-                     <label className="text-[9px] font-brand tracking-widest text-text-muted">ASSET CLOUD URL</label>
-                     <input 
-                        name="image" 
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)}
-                        placeholder="HTTPS://CLOUDINARY.COM/..." 
-                        className="w-full h-12 bg-white border border-stroke rounded-xl px-4 text-[10px] font-bold uppercase tracking-widest focus:border-brand outline-none transition-all" 
-                     />
-                     <p className="text-[7px] font-bold uppercase tracking-[0.2em] text-text-muted px-1 text-center">MEDIA PROTOCOL ACTIVE</p>
-                  </div>
-               </div>
+               <CloudinaryAssetInput 
+                 label="Asset Cloud URL"
+                 name="image"
+                 defaultValue={member?.image || ""}
+                 aspectRatio="portrait"
+               />
             </div>
 
             <div className="bg-white rounded-[2rem] border border-stroke p-8 space-y-8 shadow-sm">

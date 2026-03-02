@@ -1,5 +1,6 @@
 "use client";
 
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import { logout } from "@/lib/logout";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -25,11 +26,12 @@ import { useEffect, useState } from "react";
 
 interface AdminSidebarProps {
   adminName: string;
+  adminImage?: string;
   isOpen?: boolean;
   onClose?: () => void;
 }
 
-export default function AdminSidebar({ adminName, isOpen, onClose }: AdminSidebarProps) {
+export default function AdminSidebar({ adminName, adminImage, isOpen, onClose }: AdminSidebarProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -135,7 +137,11 @@ export default function AdminSidebar({ adminName, isOpen, onClose }: AdminSideba
       <div className="p-4 border-t border-stroke space-y-4">
          <div className="flex items-center gap-4 px-4 py-4">
             <div className="w-10 h-10 rounded-lg bg-surface border border-stroke overflow-hidden flex items-center justify-center text-brand font-bold text-xs shrink-0">
-               {adminName?.[0] || 'M'}
+               {adminImage ? (
+                  <img src={getCloudinaryUrl(adminImage)} alt={adminName} className="w-full h-full object-cover" />
+               ) : (
+                  adminName?.[0] || 'M'
+               )}
             </div>
             {!isCollapsed && (
                <motion.div

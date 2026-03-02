@@ -29,10 +29,7 @@ export default async function AdminTestimonialsPage() {
                      <Link href={`/admin/testimonials/${test.id}`} className="h-10 px-6 border border-stroke rounded-lg text-[9px] font-black uppercase tracking-widest text-text-muted hover:border-brand/40 hover:text-brand transition-all flex items-center justify-center">
                         EDIT
                      </Link>
-                     <form action={async () => {
-                       "use server";
-                       await deleteTestimonial(test.id);
-                     }}>
+                     <form action={deleteTestimonial.bind(null, test.id)}>
                         <button className="w-10 h-10 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center">
                            <Trash2 size={16} />
                         </button>

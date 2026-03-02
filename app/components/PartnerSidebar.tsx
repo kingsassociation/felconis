@@ -1,5 +1,6 @@
 "use client";
 
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import { logout } from "@/lib/logout";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -20,11 +21,12 @@ import { useEffect, useState } from "react";
 
 interface PartnerSidebarProps {
   partnerName: string;
+  partnerImage?: string;
   isOpen?: boolean;
   onClose?: () => void;
 }
 
-export default function PartnerSidebar({ partnerName, isOpen, onClose }: PartnerSidebarProps) {
+export default function PartnerSidebar({ partnerName, partnerImage, isOpen, onClose }: PartnerSidebarProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -127,8 +129,12 @@ export default function PartnerSidebar({ partnerName, isOpen, onClose }: Partner
 
       <div className="p-4 border-t border-stroke space-y-4">
          <div className="bg-brand/5 border border-brand/10 p-4 rounded-2xl flex items-center gap-4">
-            <div className="w-10 h-10 rounded-lg bg-brand flex items-center justify-center text-white font-bold uppercase transition-all shrink-0">
-               {partnerName?.[0] || 'P'}
+            <div className="w-10 h-10 rounded-lg bg-brand flex items-center justify-center text-white font-bold uppercase transition-all shrink-0 overflow-hidden">
+               {partnerImage ? (
+                  <img src={getCloudinaryUrl(partnerImage)} alt={partnerName} className="w-full h-full object-cover" />
+               ) : (
+                  partnerName?.[0] || 'P'
+               )}
             </div>
             {!isCollapsed && (
                <motion.div

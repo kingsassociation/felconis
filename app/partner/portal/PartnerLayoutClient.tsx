@@ -10,7 +10,7 @@ export default function PartnerLayoutClient({
   partner 
 }: { 
   children: React.ReactNode,
-  partner: { name: string }
+  partner: { name: string, image?: string | null }
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
@@ -29,6 +29,7 @@ export default function PartnerLayoutClient({
       
       <PartnerSidebar 
         partnerName={partner.name} 
+        partnerImage={partner.image || undefined}
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
       />

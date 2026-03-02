@@ -12,6 +12,11 @@ export async function updateLeadStatus(id: string, status: string) {
     revalidatePath("/admin");
 }
 
+export async function updateLeadStatusAction(id: string, formData: FormData) {
+    const status = formData.get("status") as string;
+    await updateLeadStatus(id, status);
+}
+
 export async function deleteLead(id: string) {
     await prisma.lead.delete({
         where: { id }

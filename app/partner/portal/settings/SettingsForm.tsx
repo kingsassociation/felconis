@@ -1,5 +1,6 @@
 "use client";
 
+import CloudinaryAssetInput from "@/app/components/CloudinaryAssetInput";
 import { updatePartnerProfile } from "@/app/partner/portal/settings/actions";
 import {
    Bell,
@@ -63,23 +64,34 @@ export default function PartnerSettingsPage({ partner }: { partner: any }) {
                   </div>
                </div>
 
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                     <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Full Legal Name</label>
-                     <input name="name" type="text" defaultValue={partner.name} className="input-field h-14 px-6 text-sm font-bold uppercase" />
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="space-y-8">
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                           <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Full Legal Name</label>
+                           <input name="name" type="text" defaultValue={partner.name} className="input-field h-14 px-6 text-sm font-bold uppercase" />
+                        </div>
+                        <div className="space-y-3">
+                           <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Official Email</label>
+                           <input disabled type="email" defaultValue={partner.email} className="input-field h-14 px-6 text-sm font-bold uppercase opacity-60 cursor-not-allowed" />
+                        </div>
+                        <div className="space-y-3">
+                           <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Phone / WhatsApp</label>
+                           <input name="phone" type="text" defaultValue={partner.phone} className="input-field h-14 px-6 text-sm font-bold uppercase" />
+                        </div>
+                        <div className="space-y-3">
+                           <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Strategic Portfolio (Link)</label>
+                           <input name="portfolio" type="text" defaultValue={partner.portfolio || ""} placeholder="HTTPS://PORTFOLIO.COM" className="input-field h-14 px-6 text-sm font-bold uppercase" />
+                        </div>
+                     </div>
                   </div>
-                  <div className="space-y-3">
-                     <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Official Email</label>
-                     <input disabled type="email" defaultValue={partner.email} className="input-field h-14 px-6 text-sm font-bold uppercase opacity-60 cursor-not-allowed" />
-                  </div>
-                  <div className="space-y-3">
-                     <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Phone / WhatsApp</label>
-                     <input name="phone" type="text" defaultValue={partner.phone} className="input-field h-14 px-6 text-sm font-bold uppercase" />
-                  </div>
-                  <div className="space-y-3">
-                     <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Strategic Portfolio (Link)</label>
-                     <input name="portfolio" type="text" defaultValue={partner.portfolio || ""} placeholder="HTTPS://PORTFOLIO.COM" className="input-field h-14 px-6 text-sm font-bold uppercase" />
-                  </div>
+
+                  <CloudinaryAssetInput 
+                    label="Node Identity (Avatar)"
+                    name="image"
+                    defaultValue={partner.image || ""}
+                    aspectRatio="square"
+                  />
                </div>
 
                <div className="space-y-3">

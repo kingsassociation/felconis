@@ -67,10 +67,7 @@ export default async function AdminWorkPage() {
                            >
                               CONFIGURE
                            </Link>
-                           <form action={async () => {
-                             "use server";
-                             await deleteCaseStudy(study.id);
-                           }}>
+                           <form action={deleteCaseStudy.bind(null, study.id)}>
                               <button className="w-10 h-10 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center">
                                  <Trash2 size={16} />
                               </button>

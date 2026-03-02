@@ -1,5 +1,6 @@
 "use client";
 
+import CloudinaryAssetInput from "@/app/components/CloudinaryAssetInput";
 import { motion } from "framer-motion";
 import { Save, X } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -97,11 +98,11 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             />
          </div>
          <div className="space-y-4 md:col-span-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Primary Visual Asset (URL)</label>
-            <input 
-              name="image" 
-              defaultValue={initialData?.image} 
-              className="w-full h-14 bg-surface border border-stroke rounded-xl px-6 text-[11px] font-black uppercase tracking-widest focus:border-brand outline-none transition-all"
+            <CloudinaryAssetInput 
+              label="Primary Visual Asset (Cloud URL)"
+              name="image"
+              defaultValue={initialData?.image || ""}
+              aspectRatio="video"
             />
          </div>
          <div className="space-y-4 md:col-span-2">

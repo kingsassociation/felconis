@@ -15,7 +15,7 @@ export default function AdminLayout({
   admin 
 }: { 
   children: React.ReactNode,
-  admin: { name: string | null }
+  admin: { name: string | null, image?: string | null }
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
@@ -34,6 +34,7 @@ export default function AdminLayout({
       
       <AdminSidebar 
         adminName={admin.name || "Administrator"} 
+        adminImage={admin.image || undefined}
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
       />

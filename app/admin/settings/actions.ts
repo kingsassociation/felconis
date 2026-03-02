@@ -10,10 +10,11 @@ export async function updateAdminProfile(formData: FormData): Promise<void> {
     if (!session || session.role !== "ADMIN") throw new Error("Unauthorized");
 
     const name = formData.get("name") as string;
+    const image = formData.get("image") as string;
 
     await prisma.user.update({
         where: { id: session.id },
-        data: { name }
+        data: { name, image }
     });
 
     revalidatePath("/admin/settings");

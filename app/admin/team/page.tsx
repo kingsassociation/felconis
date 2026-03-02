@@ -49,10 +49,7 @@ export default async function AdminTeamPage() {
                      <Link href={`/admin/team/${member.id}`} className="flex-grow h-12 border border-stroke rounded-xl text-[10px] font-brand tracking-widest text-text-muted hover:border-brand hover:text-brand hover:bg-brand/5 transition-all flex items-center justify-center">
                         CONFIGURE
                      </Link>
-                     <form action={async () => {
-                       "use server";
-                       await deleteTeamMember(member.id);
-                     }}>
+                     <form action={deleteTeamMember.bind(null, member.id)}>
                         <button className="w-12 h-12 border border-stroke rounded-xl text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center">
                            <Trash2 size={18} />
                         </button>

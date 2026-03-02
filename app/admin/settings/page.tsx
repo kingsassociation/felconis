@@ -1,3 +1,4 @@
+import CloudinaryAssetInput from "@/app/components/CloudinaryAssetInput";
 import prisma from "@/lib/prisma";
 import { getSession } from "@/lib/session";
 import {
@@ -44,15 +45,24 @@ export default async function AdminSettingsPage() {
                  </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                 <div className="space-y-3">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-brand ml-1">Full Legal Name</label>
-                    <input name="name" type="text" defaultValue={admin.name || ""} className="input-field h-14 px-6 text-sm font-bold uppercase" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                 <div className="space-y-8">
+                    <div className="space-y-3">
+                       <label className="text-[10px] font-bold uppercase tracking-widest text-brand ml-1">Full Legal Name</label>
+                       <input name="name" type="text" defaultValue={admin.name || ""} className="input-field h-14 px-6 text-sm font-bold uppercase" />
+                    </div>
+                    <div className="space-y-3">
+                       <label className="text-[10px] font-bold uppercase tracking-widest text-brand ml-1">Official Email</label>
+                       <input disabled type="email" defaultValue={admin.email} className="input-field h-14 px-6 text-sm font-bold uppercase opacity-60 cursor-not-allowed" />
+                    </div>
                  </div>
-                 <div className="space-y-3">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-brand ml-1">Official Email</label>
-                    <input disabled type="email" defaultValue={admin.email} className="input-field h-14 px-6 text-sm font-bold uppercase opacity-60 cursor-not-allowed" />
-                 </div>
+
+                 <CloudinaryAssetInput 
+                   label="Executive Avatar"
+                   name="image"
+                   defaultValue={admin.image || ""}
+                   aspectRatio="square"
+                 />
               </div>
               
               <button type="submit" className="btn-primary w-full md:w-auto px-12">
@@ -67,7 +77,7 @@ export default async function AdminSettingsPage() {
                  </div>
                  <div>
                     <h3 className="text-xl font-brand tracking-tight text-text-primary">SECURITY ACCESS.</h3>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-text-muted">MANAGE CONTROL HUB CREDENTIALS</p>
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-muted">MANAGE CONTROL HUB CREDENTIALS</p>
                  </div>
               </div>
 

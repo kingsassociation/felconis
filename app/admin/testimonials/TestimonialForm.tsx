@@ -1,5 +1,6 @@
 "use client";
 
+import CloudinaryAssetInput from "@/app/components/CloudinaryAssetInput";
 import { Save, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -63,10 +64,14 @@ export default function TestimonialForm({ testimonial }: { testimonial?: any }) 
                <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Partner Designation</label>
                <input name="designation" defaultValue={testimonial?.designation} type="text" placeholder="CEO / Founder" className="input-field h-14 text-sm font-bold uppercase" />
             </div>
-            <div className="space-y-4">
-               <label className="text-[10px] font-black uppercase tracking-widest text-brand ml-1">Photo Reference URL</label>
-               <input name="photo" defaultValue={testimonial?.photo} type="text" placeholder="https://..." className="input-field h-14 text-sm font-bold uppercase" />
-            </div>
+         <div className="space-y-4">
+            <CloudinaryAssetInput 
+              label="Partner Identity Avatar"
+              name="photo"
+              defaultValue={testimonial?.photo || ""}
+              aspectRatio="square"
+            />
+         </div>
          </div>
 
          <div className="space-y-4">
