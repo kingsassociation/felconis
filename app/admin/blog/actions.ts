@@ -11,6 +11,7 @@ export async function upsertBlogPost(formData: FormData) {
     const image = formData.get("image") as string;
     const categoryId = formData.get("categoryId") as string;
     const authorId = formData.get("authorId") as string;
+    const isStatic = formData.get("isStatic") === "on";
 
     const data = {
         title,
@@ -18,7 +19,8 @@ export async function upsertBlogPost(formData: FormData) {
         content,
         image,
         categoryId,
-        authorId
+        authorId,
+        isStatic
     };
 
     if (id) {

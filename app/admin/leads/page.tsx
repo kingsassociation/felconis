@@ -1,9 +1,16 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import prisma from "@/lib/prisma";
 import { Mail, Phone, Trash2 } from "lucide-react";
+import StatusSelector from "../components/StatusSelector";
 import { deleteLead, updateLeadStatusAction } from "./actions";
 
 export default async function AdminLeadsPage() {
   const leads = await prisma.lead.findMany({
+    include: {
+      partner: {
+        select: { image: true, name: true }
+      }
+    },
     orderBy: { createdAt: 'desc' }
   });
 
@@ -42,10 +49,21 @@ export default async function AdminLeadsPage() {
                            <div className="w-12 h-12 rounded-xl bg-brand/5 border border-brand/10 flex items-center justify-center text-brand font-bold shrink-0">
                               {lead.name[0]}
                            </div>
-                           <div>
-                              <p className="text-sm font-bold uppercase tracking-tight text-text-primary group-hover:text-brand transition-colors">{lead.name}</p>
-                              <p className="text-[10px] font-brand tracking-widest text-text-muted">{lead.company || "INDIVIDUAL ARCHIVE"}</p>
-                              <div className="flex gap-4 mt-2">
+                            <div>
+                               <p className="text-sm font-bold uppercase tracking-tight text-text-primary group-hover:text-brand transition-colors">{lead.name}</p>
+                               <div className="flex items-center gap-2 mt-1">
+                                  {lead.partner?.image ? (
+                                    <div className="w-4 h-4 rounded-full overflow-hidden border border-stroke shrink-0">
+                                      <img src={getCloudinaryUrl(lead.partner.image)} alt={lead.partner.name} className="w-full h-full object-cover" />
+                                    </div>
+                                  ) : (
+                                    <div className="w-2 h-2 rounded-full bg-brand/20 shrink-0" />
+                                  )}
+                                  <p className="text-[9px] font-brand tracking-widest text-text-muted uppercase">
+                                    {lead.company || (lead.partner?.name ? `Affiliate: ${lead.partner.name}` : "Individual Archive")}
+                                  </p>
+                               </div>
+                               <div className="flex gap-4 mt-2">
                                  <a href={`mailto:${lead.email}`} title={lead.email} className="text-text-muted hover:text-brand transition-colors"><Mail size={12} /></a>
                                  {lead.phone && <a href={`tel:${lead.phone}`} title={lead.phone} className="text-text-muted hover:text-brand transition-colors"><Phone size={12} /></a>}
                               </div>
@@ -57,20 +75,20 @@ export default async function AdminLeadsPage() {
                         <p className="text-[9px] font-brand tracking-widest text-text-muted mt-2">{new Date(lead.createdAt).toLocaleDateString()} | INCOMING SIGNAL</p>
                      </td>
                      <td className="px-10 py-8 text-center">
-                        <form action={updateLeadStatusAction.bind(null, lead.id)}>
-                           <select 
-                             name="status"
-                             defaultValue={lead.status}
-                             onChange={(e) => e.target.form?.requestSubmit()}
-                             className={`px-4 py-1.5 border rounded-lg text-[9px] font-brand tracking-widest outline-none appearance-none cursor-pointer ${STATUS_COLORS[lead.status] || STATUS_COLORS.NEW}`}
-                           >
-                              <option value="NEW">NEW INQUIRY</option>
-                              <option value="CONTACTED">CONTACTED</option>
-                              <option value="QUALIFIED">QUALIFIED NODE</option>
-                              <option value="REJECTED">ACCESS DENIED</option>
-                              <option value="ARCHIVED">ARCHIVED</option>
-                           </select>
-                        </form>
+                        <StatusSelector 
+                          id={lead.id}
+                          name="status"
+                          defaultValue={lead.status}
+                          action={updateLeadStatusAction}
+                          statusColors={STATUS_COLORS}
+                          options={[
+                            { value: "NEW", label: "NEW INQUIRY" },
+                            { value: "CONTACTED", label: "CONTACTED" },
+                            { value: "QUALIFIED", label: "QUALIFIED NODE" },
+                            { value: "REJECTED", label: "ACCESS DENIED" },
+                            { value: "ARCHIVED", label: "ARCHIVED" },
+                          ]}
+                        />
                      </td>
                      <td className="px-10 py-8 text-right pr-12">
                         <form action={deleteLead.bind(null, lead.id)}>

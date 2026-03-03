@@ -1,3 +1,4 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import prisma from "@/lib/prisma";
 import { FileText, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -57,9 +58,18 @@ export default async function AdminBlogPage() {
                            {post.category.name}
                         </span>
                      </td>
-                     <td className="px-10 py-8 text-[10px] font-black uppercase tracking-widest text-text-muted">
-                        {post.author.name}
-                     </td>
+                      <td className="px-10 py-8">
+                         <div className="flex items-center gap-4">
+                            <div className="w-8 h-8 rounded-full bg-surface border border-stroke overflow-hidden flex items-center justify-center text-brand font-bold text-[8px] shrink-0">
+                               {post.author.image ? (
+                                  <img src={getCloudinaryUrl(post.author.image)} alt={post.author.name} className="w-full h-full object-cover" />
+                               ) : (
+                                  post.author.name?.[0] || 'A'
+                               )}
+                            </div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-text-muted">{post.author.name}</span>
+                         </div>
+                      </td>
                      <td className="px-10 py-8 text-right">
                         <div className="flex justify-end gap-4">
                            <Link 

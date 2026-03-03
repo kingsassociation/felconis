@@ -61,7 +61,7 @@ export default function BlogListContent({ initialPosts, categories }: BlogListCo
         </section>
 
         {/* SEARCH & FILTER PROTOCOL */}
-        <section className="sticky top-16 z-40 bg-white/80 backdrop-blur-md border-b border-stroke py-6">
+        <section className="sticky top-[var(--navbar-offset)] z-40 bg-white/80 backdrop-blur-md border-b border-stroke py-6 transition-all duration-300">
            <div className="container-max">
               <div className="flex flex-col lg:flex-row gap-8 lg:items-center justify-between">
                  <div className="flex flex-wrap gap-2">

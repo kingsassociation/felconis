@@ -3,23 +3,23 @@
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import {
-    BarChart3,
-    Box,
-    ChevronDown,
-    ChevronRight,
-    Code2,
-    Cpu,
-    Layers,
-    Layout,
-    Menu,
-    Palette,
-    Search,
-    Share2,
-    Target,
-    TrendingUp,
-    Video,
-    X,
-    Zap
+  BarChart3,
+  Box,
+  ChevronDown,
+  ChevronRight,
+  Code2,
+  Cpu,
+  Layers,
+  Layout,
+  Menu,
+  Palette,
+  Search,
+  Share2,
+  Target,
+  TrendingUp,
+  Video,
+  X,
+  Zap
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -64,10 +64,29 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
+    
+    // Hide on scroll down, show on scroll up
+    if (latest > lastScrollY && latest > 150) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+    setLastScrollY(latest);
   });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isVisible) {
+      root.style.setProperty('--navbar-offset', '4rem'); // 16 * 0.25rem = 4rem (h-16)
+    } else {
+      root.style.setProperty('--navbar-offset', '0px');
+    }
+  }, [isVisible]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -76,9 +95,12 @@ export default function Navbar() {
 
   return (
     <>
-    <nav 
+    <motion.nav 
+      initial={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : -100 }}
+      transition={{ duration: 0.3 }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300", // Reduced h-20 to h-16
+        "fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300",
         isScrolled ? "bg-white/95 backdrop-blur-md border-b border-stroke shadow-sm" : "bg-transparent"
       )}
       onMouseLeave={() => setIsMegaMenuOpen(false)}
@@ -216,7 +238,7 @@ export default function Navbar() {
           {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
-    </nav>
+    </motion.nav>
 
     {/* MOBILE MENU OVERLAY */}
     <AnimatePresence>

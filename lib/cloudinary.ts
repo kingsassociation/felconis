@@ -21,7 +21,7 @@ const INSTITUTIONAL_TRANSFORMATION = "c_fill,g_auto,q_auto,f_auto";
  * Generates a Cloudinary URL with the institutional 'felconis' protocol.
  * Ensures all assets are correctly prefixed with the 'felconis/' folder.
  */
-export function getCloudinaryUrl(url: string, transformation: string = INSTITUTIONAL_TRANSFORMATION): string {
+export function getCloudinaryUrl(url?: string | null, transformation: string = INSTITUTIONAL_TRANSFORMATION): string {
     if (!url) return "";
 
     // Handle generic strings (Public IDs)

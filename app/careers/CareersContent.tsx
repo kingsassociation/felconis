@@ -1,12 +1,13 @@
 "use client";
 
+import { stripHtml } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
-    ArrowRight,
-    Briefcase,
-    MapPin,
-    Search,
-    Zap
+  ArrowRight,
+  Briefcase,
+  MapPin,
+  Search,
+  Zap
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -73,7 +74,7 @@ export default function CareersContent({ initialJobs }: CareersContentProps) {
         </section>
 
         {/* SEARCH PROTOCOL */}
-        <section className="sticky top-16 z-40 bg-white/80 backdrop-blur-md border-b border-stroke py-6">
+        <section className="sticky top-[var(--navbar-offset)] z-40 bg-white/80 backdrop-blur-md border-b border-stroke py-6 transition-all duration-300">
            <div className="container-max">
               <div className="max-w-2xl mx-auto relative group">
                 <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-brand transition-colors" size={20} />
@@ -113,7 +114,7 @@ export default function CareersContent({ initialJobs }: CareersContentProps) {
                            </div>
                            <h3 className="text-3xl font-black uppercase tracking-tighter text-text-primary group-hover:text-brand transition-colors leading-none">{job.title}</h3>
                            <p className="text-[11px] font-black uppercase tracking-widest text-text-muted leading-relaxed max-w-xl">
-                             {job.overview || job.description.substring(0, 100)}...
+                             {job.overview || stripHtml(job.description).substring(0, 100)}...
                            </p>
                         </div>
 

@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { stripHtml } from "@/lib/utils";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogContent from "./BlogContent";
@@ -16,12 +17,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return { title: "Insight Not Found" };
 
+  const cleanDescription = stripHtml(post.content).substring(0, 160);
+
   return {
     title: `${post.title} | Felconis Intelligence`,
-    description: post.content.substring(0, 160),
+    description: cleanDescription,
     openGraph: {
       title: `${post.title} | Felconis Institutional Strategy`,
-      description: post.content.substring(0, 160),
+      description: cleanDescription,
       images: post.image ? [post.image] : [],
       type: "article",
     },

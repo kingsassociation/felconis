@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { stripHtml } from "@/lib/utils";
 import { Metadata } from "next";
 import BlogListContent from "./BlogListContent";
 
@@ -26,7 +27,7 @@ export default async function BlogPage() {
     ...post,
     date: post.createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     author: post.author.name || "Institutional Lead",
-    excerpt: post.content.substring(0, 160) + "..."
+    excerpt: stripHtml(post.content).substring(0, 160) + "..."
   }));
 
   return <BlogListContent initialPosts={formattedPosts} categories={categories} />;

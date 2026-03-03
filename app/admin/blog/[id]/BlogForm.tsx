@@ -112,6 +112,22 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
                       ))}
                    </select>
                 </div>
+
+                <div className="pt-4 border-t border-stroke/50">
+                    <label className="flex items-center gap-3 cursor-pointer group">
+                        <div className="relative">
+                            <input 
+                                type="checkbox" 
+                                name="isStatic" 
+                                defaultChecked={initialData?.isStatic}
+                                className="sr-only peer"
+                            />
+                            <div className="w-10 h-5 bg-stroke rounded-full peer peer-checked:bg-brand transition-all"></div>
+                            <div className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full peer-checked:translate-x-5 transition-all"></div>
+                        </div>
+                        <span className="text-[9px] font-brand tracking-widest text-text-muted group-hover:text-brand transition-colors">AUTHORITY LAYOUT (PREMIUM LONG-FORM)</span>
+                    </label>
+                </div>
              </div>
           </div>
 

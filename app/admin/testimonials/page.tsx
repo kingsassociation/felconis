@@ -1,3 +1,4 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import prisma from "@/lib/prisma";
 import { Plus, Quote, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -39,10 +40,14 @@ export default async function AdminTestimonialsPage() {
                
                <p className="text-sm font-medium text-text-secondary leading-relaxed line-clamp-3 italic">"{test.quote}"</p>
                
-               <div className="flex items-center gap-4 pt-6 border-t border-stroke">
-                  <div className="w-10 h-10 rounded-full bg-surface border border-stroke flex items-center justify-center text-brand font-bold uppercase transition-all group-hover:bg-brand group-hover:text-white group-hover:border-brand">
-                     {test.name[0]}
-                  </div>
+                <div className="flex items-center gap-4 pt-6 border-t border-stroke">
+                   <div className="w-10 h-10 rounded-full bg-surface border border-stroke flex items-center justify-center text-brand font-bold uppercase transition-all group-hover:bg-brand group-hover:text-white group-hover:border-brand overflow-hidden">
+                      {test.photo ? (
+                        <img src={getCloudinaryUrl(test.photo)} alt={test.name} className="w-full h-full object-cover" />
+                      ) : (
+                        test.name[0]
+                      )}
+                   </div>
                   <div>
                      <p className="text-xs font-black uppercase tracking-tight text-text-primary">{test.name}</p>
                      <p className="text-[9px] font-black uppercase tracking-widest text-text-muted">{test.designation || test.company}</p>

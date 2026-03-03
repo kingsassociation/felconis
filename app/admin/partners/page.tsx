@@ -1,5 +1,7 @@
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 import prisma from "@/lib/prisma";
 import { Mail, MessageSquare, Phone, Save, Trash2 } from "lucide-react";
+import StatusSelector from "../components/StatusSelector";
 import { deletePartner, updatePartnerFinance, updatePartnerStatus } from "./actions";
 
 export default async function AdminPartnersPage() {
@@ -38,8 +40,12 @@ export default async function AdminPartnersPage() {
                   <tr key={partner.id} className="group hover:bg-surface transition-colors">
                      <td className="px-10 py-8">
                         <div className="flex gap-6">
-                           <div className="w-12 h-12 rounded-xl bg-brand/5 border border-brand/10 flex items-center justify-center text-brand font-bold shrink-0">
-                               {partner.name[0]}
+                           <div className="w-12 h-12 rounded-xl bg-brand/5 border border-brand/10 flex items-center justify-center text-brand font-bold shrink-0 overflow-hidden">
+                               {partner.image ? (
+                                 <img src={getCloudinaryUrl(partner.image)} alt={partner.name} className="w-full h-full object-cover" />
+                               ) : (
+                                 partner.name[0]
+                               )}
                            </div>
                            <div>
                               <p className="text-sm font-bold uppercase tracking-tight text-text-primary group-hover:text-brand transition-colors">{partner.name}</p>
@@ -86,21 +92,20 @@ export default async function AdminPartnersPage() {
                      </td>
 
                      <td className="px-10 py-8 text-center">
-                         <form action={updatePartnerStatus}>
-                           <input type="hidden" name="id" value={partner.id} />
-                           <select 
-                             name="status"
-                             defaultValue={partner.status}
-                             onChange={(e) => e.target.form?.requestSubmit()}
-                             className={`px-4 py-1.5 border rounded-lg text-[9px] font-brand tracking-widest outline-none appearance-none cursor-pointer ${STATUS_COLORS[partner.status] || STATUS_COLORS.PENDING}`}
-                           >
-                              <option value="PENDING">PENDING PROTOCOL</option>
-                              <option value="REVIEWING">UNDER REVIEW</option>
-                              <option value="APPROVED">INSTITUTIONAL PARTNER</option>
-                              <option value="REJECTED">ACCESS DISCARDED</option>
-                           </select>
-                        </form>
-                     </td>
+                          <StatusSelector 
+                            id={partner.id}
+                            name="status"
+                            defaultValue={partner.status}
+                            action={updatePartnerStatus}
+                            statusColors={STATUS_COLORS}
+                            options={[
+                              { value: "PENDING", label: "PENDING PROTOCOL" },
+                              { value: "REVIEWING", label: "UNDER REVIEW" },
+                              { value: "APPROVED", label: "INSTITUTIONAL PARTNER" },
+                              { value: "REJECTED", label: "ACCESS DISCARDED" },
+                            ]}
+                          />
+                      </td>
                      
                       <td className="px-10 py-8 text-right pr-12">
                         <form action={deletePartner}>

@@ -1,10 +1,11 @@
 "use client";
 
 import { getCloudinaryUrl } from "@/lib/cloudinary";
+import { stripHtml } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
-    ArrowRight,
-    Zap
+   ArrowRight,
+   Zap
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -61,7 +62,7 @@ export default function WorkContent({ initialStudies }: WorkContentProps) {
         </section>
 
         {/* FILTER PROTOCOL */}
-        <section className="sticky top-16 z-40 bg-white/80 backdrop-blur-md border-b border-stroke py-4">
+        <section className="sticky top-[var(--navbar-offset)] z-40 bg-white/80 backdrop-blur-md border-b border-stroke py-4 transition-all duration-300">
            <div className="container-max flex items-center justify-center">
               <div className="flex items-center gap-6">
                  <div className="flex flex-wrap gap-2">
@@ -122,7 +123,7 @@ export default function WorkContent({ initialStudies }: WorkContentProps) {
                             {study.title}
                           </h3>
                           <p className="text-[11px] text-text-muted uppercase tracking-widest font-black leading-relaxed">
-                            {study.problem.substring(0, 100)}...
+                            {stripHtml(study.problem).substring(0, 100)}...
                           </p>
                        </div>
                      </Link>
