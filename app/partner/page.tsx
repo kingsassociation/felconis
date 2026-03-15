@@ -96,31 +96,31 @@ export default function PartnerPage() {
         <div className="min-h-screen bg-white text-text-primary">
             <Navbar />
 
-      <main className="grain pt-16">
+      <main className="grain pt-4 md:pt-8">
         {/* INSTITUTIONAL HERO */}
-        <section className="relative py-20 overflow-hidden border-b border-stroke text-center">
+        <section className="relative py-4 md:py-8 md:pb-20 overflow-hidden border-b border-stroke text-center">
           <div className="absolute inset-x-0 top-0 h-[600px] bg-gradient-to-b from-brand/[0.03] to-transparent pointer-events-none -z-10" />
           
-          <div className="container-max relative z-10 space-y-12">
+          <div className="container-max relative z-10 space-y-8 md:space-y-12">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-6 md:space-y-8"
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand/5 border border-brand/10 rounded-md">
                  <div className="w-1 h-1 bg-brand rounded-full" />
                  <p className="text-[10px] font-bold uppercase tracking-widest text-brand">Institutional Partnership</p>
               </div>
               
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] uppercase text-text-primary">
+              <h1 className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] uppercase text-text-primary">
                 EXECUTIVE <br /> <span className="text-brand">PARTNER</span> <br /> PROTOCOL.
               </h1>
-              <p className="text-text-secondary max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
+              <p className="text-text-secondary max-w-2xl mx-auto text-base md:text-xl font-medium leading-relaxed">
                 Connect international enterprises with industry-leading digital architecture. Join a structured strategic program designed for consultants and professional advocates.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 md:pt-6">
                 <a href="#apply" className="h-14 px-10 bg-brand text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center gap-3 shadow-lg shadow-brand/10">
                   Submit Application <ArrowRight size={14} />
                 </a>

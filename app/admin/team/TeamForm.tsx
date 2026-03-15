@@ -43,8 +43,8 @@ export default function TeamForm({ member }: { member?: any }) {
     <div className="max-w-5xl mx-auto space-y-12 pb-20">
       <div className="flex justify-between items-end">
          <div className="space-y-4">
-            <h1 className="text-4xl font-brand tracking-tight text-text-primary uppercase leading-tight">CONFIGURE <span className="text-brand">LEADER.</span></h1>
-            <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest bg-surface px-4 py-2 border border-stroke rounded-lg inline-block">TEAM MEMBER ARCHITECTURAL SETTINGS & IDENTITY PROTOCOLS</p>
+            <h1 className="text-4xl font-brand tracking-tight text-text-primary uppercase leading-tight">EDIT <span className="text-brand">MEMBER.</span></h1>
+            <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest bg-surface px-4 py-2 border border-stroke rounded-lg inline-block">TEAM MEMBER PROFILE AND ACCOUNT SETTINGS</p>
          </div>
       </div>
 
@@ -56,23 +56,23 @@ export default function TeamForm({ member }: { member?: any }) {
                   <div className="w-10 h-10 rounded-xl bg-brand/5 flex items-center justify-center">
                      <User size={20} />
                   </div>
-                  <h3 className="text-xs font-brand tracking-widest">IDENTITY CORE</h3>
+                  <h3 className="text-xs font-brand tracking-widest">PERSONAL INFORMATION</h3>
                </div>
 
                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                   <div className="space-y-4">
-                     <label className="text-[10px] font-brand tracking-widest text-brand ml-1">FULL LEGAL NAME</label>
+                     <label className="text-[10px] font-brand tracking-widest text-brand ml-1">FULL NAME</label>
                      <input required name="name" defaultValue={member?.name} type="text" placeholder="E.G. JOHN DOE" className="w-full h-14 bg-surface border border-stroke rounded-xl px-6 text-sm font-bold uppercase focus:border-brand outline-none transition-all" />
                   </div>
                   <div className="space-y-4">
-                     <label className="text-[10px] font-brand tracking-widest text-brand ml-1">INSTITUTIONAL ROLE</label>
+                     <label className="text-[10px] font-brand tracking-widest text-brand ml-1">ROLE / TITLE</label>
                      <input required name="role" defaultValue={member?.role} type="text" placeholder="E.G. CHIEF STRATEGIST" className="w-full h-14 bg-surface border border-stroke rounded-xl px-6 text-sm font-bold uppercase focus:border-brand outline-none transition-all" />
                   </div>
                </div>
 
                <div className="space-y-4">
-                  <label className="text-[10px] font-brand tracking-widest text-brand ml-1">BIO / MISSION PROTOCOL</label>
-                  <textarea name="bio" defaultValue={member?.bio} rows={6} placeholder="INSTITUTIONAL BIO SUMMARY..." className="w-full bg-surface border border-stroke rounded-xl p-8 text-sm font-medium leading-relaxed focus:border-brand outline-none transition-all resize-none" />
+                  <label className="text-[10px] font-brand tracking-widest text-brand ml-1">BIO / DESCRIPTION</label>
+                  <textarea name="bio" defaultValue={member?.bio} rows={6} placeholder="PROFILE BIO SUMMARY..." className="w-full bg-surface border border-stroke rounded-xl p-8 text-sm font-medium leading-relaxed focus:border-brand outline-none transition-all resize-none" />
                </div>
             </div>
 
@@ -81,16 +81,16 @@ export default function TeamForm({ member }: { member?: any }) {
                   <div className="w-10 h-10 rounded-xl bg-brand/5 flex items-center justify-center">
                      <LinkIcon size={20} />
                   </div>
-                  <h3 className="text-xs font-brand tracking-widest">SOCIAL NODES</h3>
+                  <h3 className="text-xs font-brand tracking-widest">SOCIAL LINKS</h3>
                </div>
 
                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                   <div className="space-y-4">
-                     <label className="text-[10px] font-brand tracking-widest text-brand ml-1">LINKEDIN URL</label>
+                     <label className="text-[10px] font-brand tracking-widest text-brand ml-1">LINKEDIN PROFILE</label>
                      <input name="linkedin" defaultValue={member?.linkedin} type="text" placeholder="HTTPS://LINKEDIN.COM/..." className="w-full h-14 bg-surface border border-stroke rounded-xl px-6 text-sm font-bold uppercase focus:border-brand outline-none transition-all" />
                   </div>
                   <div className="space-y-4">
-                     <label className="text-[10px] font-brand tracking-widest text-brand ml-1">TWITTER / X URL</label>
+                     <label className="text-[10px] font-brand tracking-widest text-brand ml-1">TWITTER / X PROFILE</label>
                      <input name="twitter" defaultValue={member?.twitter} type="text" placeholder="HTTPS://TWITTER.COM/..." className="w-full h-14 bg-surface border border-stroke rounded-xl px-6 text-sm font-bold uppercase focus:border-brand outline-none transition-all" />
                   </div>
                </div>
@@ -102,11 +102,11 @@ export default function TeamForm({ member }: { member?: any }) {
             <div className="bg-surface border border-stroke rounded-[2rem] p-8 space-y-10">
                <div className="flex items-center gap-4 text-brand">
                   <User size={20} />
-                  <h3 className="text-xs font-brand tracking-widest">VISUAL ASSET</h3>
+                  <h3 className="text-xs font-brand tracking-widest">PROFILE IMAGE</h3>
                </div>
 
                <CloudinaryAssetInput 
-                 label="Asset Cloud URL"
+                 label="Cloudinary URL"
                  name="image"
                  defaultValue={member?.image || ""}
                  aspectRatio="portrait"
@@ -116,21 +116,21 @@ export default function TeamForm({ member }: { member?: any }) {
             <div className="bg-white rounded-[2rem] border border-stroke p-8 space-y-8 shadow-sm">
                <div className="flex items-center gap-4 text-brand">
                   <Shield size={20} />
-                  <h3 className="text-xs font-brand tracking-widest">PRIORITY</h3>
+                  <h3 className="text-xs font-brand tracking-widest">DISPLAY ORDER</h3>
                </div>
                <div className="space-y-4">
-                  <label className="text-[9px] font-brand tracking-widest text-text-muted">ORDER WEIGHT</label>
+                  <label className="text-[9px] font-brand tracking-widest text-text-muted">PRIORITY WEIGHT</label>
                   <input name="order" defaultValue={member?.order || 0} type="number" className="w-full h-12 bg-surface border border-stroke rounded-xl px-4 text-[10px] font-bold uppercase tracking-widest focus:border-brand outline-none transition-all" />
-                  <p className="text-[7px] font-medium text-text-muted italic">Lower value = higher institutional priority.</p>
+                  <p className="text-[7px] font-medium text-text-muted italic">Lower value = higher display priority.</p>
                </div>
             </div>
 
             <div className="flex flex-col gap-4">
                <button disabled={isPending} type="submit" className="w-full h-16 bg-brand text-white text-[10px] font-brand tracking-widest rounded-2xl hover:opacity-90 transition-all shadow-xl shadow-brand/10 flex items-center justify-center gap-3 disabled:opacity-50">
-                  <Save size={18} /> {isPending ? "SYNCHRONIZING..." : "SYNCHRONIZE LEADER"}
+                  <Save size={18} /> {isPending ? "SAVING..." : "SAVE MEMBER"}
                </button>
                <button type="button" onClick={() => router.back()} className="w-full h-14 border border-stroke rounded-2xl text-[10px] font-brand tracking-widest text-text-muted hover:bg-surface transition-all flex items-center justify-center gap-3">
-                  <X size={18} /> ABORT PROTOCOL
+                  <X size={18} /> CANCEL
                </button>
             </div>
          </aside>

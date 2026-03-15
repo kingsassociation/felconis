@@ -17,10 +17,13 @@ export async function upsertCaseStudy(formData: FormData) {
     const image = formData.get("image") as string;
 
     const executionRaw = formData.get("execution") as string;
-    const execution = executionRaw ? executionRaw.split(",").map(f => f.trim()) : [];
+    const execution = executionRaw ? executionRaw.split(",").map(f => f.trim()).filter(Boolean) : [];
 
     const resultsRaw = formData.get("results") as string;
-    const results = resultsRaw ? resultsRaw.split(",").map(f => f.trim()) : [];
+    const results = resultsRaw ? resultsRaw.split(",").map(f => f.trim()).filter(Boolean) : [];
+
+    const technologiesRaw = formData.get("technologies") as string;
+    const technologies = technologiesRaw ? technologiesRaw.split(",").map(f => f.trim()).filter(Boolean) : [];
 
     const data = {
         title,
@@ -34,7 +37,8 @@ export async function upsertCaseStudy(formData: FormData) {
         strategy,
         image,
         execution,
-        results
+        results,
+        technologies
     };
 
     if (id) {

@@ -25,11 +25,10 @@ export default function AdminLayout({
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-white flex flex-col lg:flex-row">
       <MobileDashboardHeader 
         onMenuClick={() => setIsSidebarOpen(true)} 
         title="FELCONIS"
-        subtitle="CONTROL HUB"
       />
       
       <AdminSidebar 
@@ -40,8 +39,10 @@ export default function AdminLayout({
       />
 
       {/* Main Content */}
-      <main className="flex-grow p-6 lg:p-12 overflow-y-auto mt-16 lg:mt-0">
-         {children}
+      <main className="flex-grow p-4 lg:p-8 overflow-y-auto mt-16 lg:mt-0 max-w-7xl mx-auto w-full">
+         <div className="bg-white min-h-[calc(100vh-4rem)] lg:min-h-screen pt-4">
+            {children}
+         </div>
       </main>
     </div>
   );

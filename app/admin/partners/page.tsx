@@ -1,6 +1,6 @@
 import { getCloudinaryUrl } from "@/lib/cloudinary";
 import prisma from "@/lib/prisma";
-import { Mail, MessageSquare, Phone, Save, Trash2 } from "lucide-react";
+import { ExternalLink, Mail, MessageSquare, Phone, Save, Trash2 } from "lucide-react";
 import StatusSelector from "../components/StatusSelector";
 import { deletePartner, updatePartnerFinance, updatePartnerStatus } from "./actions";
 
@@ -21,7 +21,7 @@ export default async function AdminPartnersPage() {
       <div className="flex justify-between items-end">
          <div className="space-y-4">
             <h1 className="text-4xl font-brand tracking-tight text-text-primary uppercase leading-tight">PARTNER <span className="text-brand">NETWORK.</span></h1>
-            <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest bg-surface px-4 py-2 border border-stroke rounded-lg inline-block">MANAGE INSTITUTIONAL RECRUITMENT AND FINANCIAL PROTOCOLS</p>
+            <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest bg-surface px-4 py-2 border border-stroke rounded-lg inline-block">MANAGE PARTNER ACCOUNTS, COMMISSION RATES, AND STATUS</p>
          </div>
       </div>
 
@@ -29,9 +29,9 @@ export default async function AdminPartnersPage() {
          <table className="w-full text-left border-collapse">
             <thead>
                <tr className="border-b border-stroke bg-surface/50 text-[10px] font-brand tracking-widest text-text-muted">
-                  <th className="px-10 py-6 text-left">PARTNER IDENTITY</th>
-                  <th className="px-10 py-6 text-left">FINANCIAL PROTOCOL</th>
-                  <th className="px-10 py-6 text-center">PROTOCOL STATUS</th>
+                  <th className="px-10 py-6 text-left">PARTNER PROFILE</th>
+                  <th className="px-10 py-6 text-left">FINANCIAL SETTINGS</th>
+                  <th className="px-10 py-6 text-center">ACCOUNT STATUS</th>
                   <th className="px-10 py-6 text-right pr-12">ACTIONS</th>
                </tr>
             </thead>
@@ -49,7 +49,7 @@ export default async function AdminPartnersPage() {
                            </div>
                            <div>
                               <p className="text-sm font-bold uppercase tracking-tight text-text-primary group-hover:text-brand transition-colors">{partner.name}</p>
-                              <p className="text-[9px] font-brand tracking-widest text-text-muted">ID: {partner.id.slice(0, 8)}</p>
+                              <p className="text-[9px] font-brand tracking-widest text-text-muted">PARTNER ID: {partner.id.slice(0, 8)}</p>
                               <div className="flex gap-4 mt-2">
                                  <a href={`mailto:${partner.email}`} title={partner.email} className="text-text-muted hover:text-brand transition-colors"><Mail size={12} /></a>
                                  <a href={`tel:${partner.phone}`} title={partner.phone} className="text-text-muted hover:text-brand transition-colors"><Phone size={12} /></a>
@@ -73,7 +73,7 @@ export default async function AdminPartnersPage() {
                               />
                            </div>
                            <div className="space-y-1">
-                              <label className="text-[8px] font-bold uppercase tracking-widest text-text-muted">Yield (BDT)</label>
+                              <label className="text-[8px] font-bold uppercase tracking-widest text-text-muted">Total Earned (BDT)</label>
                               <input 
                                 name="totalEarned"
                                 type="number" 
@@ -84,7 +84,7 @@ export default async function AdminPartnersPage() {
                            <button 
                              type="submit"
                              className="mt-4 p-2 text-text-muted hover:text-brand transition-colors opacity-0 group-hover/form:opacity-100"
-                             title="Synchronize Finance"
+                             title="Save Finance"
                            >
                               <Save size={14} />
                            </button>
@@ -99,24 +99,32 @@ export default async function AdminPartnersPage() {
                             action={updatePartnerStatus}
                             statusColors={STATUS_COLORS}
                             options={[
-                              { value: "PENDING", label: "PENDING PROTOCOL" },
+                              { value: "PENDING", label: "PENDING" },
                               { value: "REVIEWING", label: "UNDER REVIEW" },
-                              { value: "APPROVED", label: "INSTITUTIONAL PARTNER" },
-                              { value: "REJECTED", label: "ACCESS DISCARDED" },
+                              { value: "APPROVED", label: "APPROVED" },
+                              { value: "REJECTED", label: "REJECTED" },
                             ]}
                           />
                       </td>
                      
                       <td className="px-10 py-8 text-right pr-12">
-                        <form action={deletePartner}>
-                           <input type="hidden" name="id" value={partner.id} />
-                           <button 
-                             type="submit"
-                             className="w-10 h-10 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center ml-auto"
-                           >
-                              <Trash2 size={16} />
-                           </button>
-                        </form>
+                        <div className="flex justify-end gap-3">
+                            <a 
+                              href={`/admin/partners/${partner.id}`}
+                              className="w-10 h-10 border border-stroke rounded-lg text-text-muted hover:text-brand hover:border-brand/40 transition-all flex items-center justify-center"
+                            >
+                               <ExternalLink size={16} />
+                            </a>
+                            <form action={deletePartner}>
+                               <input type="hidden" name="id" value={partner.id} />
+                               <button 
+                                 type="submit"
+                                 className="w-10 h-10 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center"
+                               >
+                                  <Trash2 size={16} />
+                               </button>
+                            </form>
+                        </div>
                       </td>
                   </tr>
                ))}
@@ -125,7 +133,7 @@ export default async function AdminPartnersPage() {
          
          {partners.length === 0 && (
             <div className="py-20 text-center space-y-4">
-               <p className="text-[10px] font-bold uppercase tracking-widest text-text-muted">No institutional partnership requests detected.</p>
+               <p className="text-[10px] font-bold uppercase tracking-widest text-text-muted">No partners found.</p>
             </div>
          )}
       </div>

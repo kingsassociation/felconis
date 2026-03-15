@@ -112,7 +112,7 @@ export default function JobForm({ initialData }: JobFormProps) {
          </div>
 
          <div className="space-y-4 md:col-span-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Institutional Overview</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Job Overview</label>
             <textarea 
               name="overview" 
               defaultValue={initialData?.overview} 
@@ -122,7 +122,7 @@ export default function JobForm({ initialData }: JobFormProps) {
             />
          </div>
          <div className="space-y-4 md:col-span-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Full Description</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Detailed Description</label>
             <textarea 
               name="description" 
               defaultValue={initialData?.description} 
@@ -148,7 +148,7 @@ export default function JobForm({ initialData }: JobFormProps) {
             />
          </div>
          <div className="space-y-4 md:col-span-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Board Benefits (Comma Separated)</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Benefits (Comma Separated)</label>
             <input 
               name="benefits" 
               defaultValue={initialData?.benefits?.join(", ")} 
@@ -164,7 +164,7 @@ export default function JobForm({ initialData }: JobFormProps) {
            className="h-14 px-10 border border-stroke rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-surface transition-all flex items-center gap-3"
          >
             <X size={16} />
-            ABORT MISSION
+            CANCEL
          </button>
          <button 
            type="submit" 
@@ -172,7 +172,7 @@ export default function JobForm({ initialData }: JobFormProps) {
            className="h-14 px-12 bg-brand text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/10 flex items-center gap-3 disabled:opacity-50"
          >
             <Save size={16} />
-            {isSubmitting ? "DEPLOYING..." : "COMMIT NODE"}
+            {isSubmitting ? "SAVING..." : "SAVE JOB POSTING"}
          </button>
       </div>
     </motion.form>

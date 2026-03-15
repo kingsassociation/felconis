@@ -1,7 +1,12 @@
 import prisma from "@/lib/prisma";
+import { getSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 import AdminOverviewContent from "./AdminOverviewContent";
 
 export default async function AdminDashboard() {
+  const session = await getSession();
+  if (!session) redirect("/portal/login");
+
   const [
     serviceCount,
     workCount,
@@ -9,7 +14,8 @@ export default async function AdminDashboard() {
     leadCount,
     appCount,
     partnerCount,
-    recentLeads
+    recentLeads,
+    admin
   ] = await Promise.all([
     prisma.service.count(),
     prisma.caseStudy.count(),
@@ -20,6 +26,10 @@ export default async function AdminDashboard() {
     prisma.lead.findMany({
       orderBy: { createdAt: 'desc' },
       take: 5
+    }),
+    prisma.user.findUnique({
+      where: { id: session.id },
+      select: { name: true }
     })
   ]);
 
@@ -29,14 +39,15 @@ export default async function AdminDashboard() {
   const stats = [
     { label: "Active Nodes", val: activeNodes.toString(), delta: "+2", icon: "Zap" },
     { label: "Total Leads", val: totalLeads.toString(), delta: "+12", icon: "Users" },
-    { label: "Partner Network", val: partnerCount.toString(), delta: "+5", icon: "Activity" },
-    { label: "Strategic Impact", val: workCount.toString(), delta: "0.4", icon: "TrendingUp" },
+    { label: "Partners", val: partnerCount.toString(), delta: "+5", icon: "Activity" },
+    { label: "Case Studies", val: workCount.toString(), delta: "0.4", icon: "TrendingUp" },
   ];
 
   return (
     <AdminOverviewContent 
       stats={stats} 
       recentLeads={recentLeads}
+      adminName={admin.name || "Administrator"}
     />
   );
 }

@@ -42,7 +42,7 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
         {/* Main Content Node */}
         <div className="lg:col-span-8 space-y-10">
           <div className="space-y-4">
-             <label className="text-[10px] font-brand tracking-widest text-brand ml-1">BROADCAST TITLE</label>
+             <label className="text-[10px] font-brand tracking-widest text-brand ml-1">POST TITLE</label>
              <input 
                name="title" 
                defaultValue={initialData?.title} 
@@ -53,14 +53,14 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
           </div>
 
           <div className="space-y-4">
-             <label className="text-[10px] font-brand tracking-widest text-brand ml-1">BROADCAST CONTENT (INTEL PROTOCOL)</label>
+             <label className="text-[10px] font-brand tracking-widest text-brand ml-1">POST CONTENT</label>
              <textarea 
                name="content" 
                defaultValue={initialData?.content} 
                required
                rows={15}
                className="w-full bg-surface border border-stroke rounded-2xl p-8 text-sm font-medium leading-relaxed focus:border-brand outline-none transition-all resize-none"
-               placeholder="INITIATE INTEL BROADCAST CONTENT..."
+               placeholder="WRITE POST CONTENT..."
              />
           </div>
         </div>
@@ -70,23 +70,23 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
           <div className="bg-surface border border-stroke rounded-[2rem] p-8 space-y-8">
              <div className="flex items-center gap-3 text-brand">
                 <Globe size={18} />
-                <h3 className="text-xs font-brand tracking-widest">DEPLOYMENT RADIUS</h3>
+                <h3 className="text-xs font-brand tracking-widest">PUBLISHING SETTINGS</h3>
              </div>
 
              <div className="space-y-6">
                 <div className="space-y-3">
-                   <label className="text-[9px] font-brand tracking-widest text-text-muted">ROUTE SLUG</label>
+                   <label className="text-[9px] font-brand tracking-widest text-text-muted">URL SLUG</label>
                    <input 
                      name="slug" 
                      defaultValue={initialData?.slug} 
                      required
-                     placeholder="GROWTH-ENGINEERING"
+                     placeholder="post-slug"
                      className="w-full h-12 bg-white border border-stroke rounded-xl px-4 text-[10px] font-bold uppercase tracking-widest focus:border-brand outline-none transition-all"
                    />
                 </div>
 
                 <div className="space-y-3">
-                   <label className="text-[9px] font-brand tracking-widest text-text-muted">INTELLIGENCE SECTOR</label>
+                   <label className="text-[9px] font-brand tracking-widest text-text-muted">CATEGORY</label>
                    <select 
                      name="categoryId" 
                      defaultValue={initialData?.categoryId}
@@ -100,7 +100,7 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
                 </div>
 
                 <div className="space-y-3">
-                   <label className="text-[9px] font-brand tracking-widest text-text-muted">INSTITUTIONAL LEAD</label>
+                   <label className="text-[9px] font-brand tracking-widest text-text-muted">AUTHOR</label>
                    <select 
                      name="authorId" 
                      defaultValue={initialData?.authorId}
@@ -125,7 +125,7 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
                             <div className="w-10 h-5 bg-stroke rounded-full peer peer-checked:bg-brand transition-all"></div>
                             <div className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full peer-checked:translate-x-5 transition-all"></div>
                         </div>
-                        <span className="text-[9px] font-brand tracking-widest text-text-muted group-hover:text-brand transition-colors">AUTHORITY LAYOUT (PREMIUM LONG-FORM)</span>
+                        <span className="text-[9px] font-brand tracking-widest text-text-muted group-hover:text-brand transition-colors">PREMIUM LONG-FORM LAYOUT</span>
                     </label>
                 </div>
              </div>
@@ -134,11 +134,11 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
           <div className="bg-white border border-stroke rounded-[2rem] p-8 space-y-8 shadow-sm">
              <div className="flex items-center gap-3 text-brand">
                 <FileText size={18} />
-                <h3 className="text-xs font-brand tracking-widest">VISUAL ASSET</h3>
+                <h3 className="text-xs font-brand tracking-widest">FEATURED IMAGE</h3>
              </div>
 
              <CloudinaryAssetInput 
-               label="Asset Cloud URL"
+               label="Cloudinary URL"
                name="image"
                defaultValue={initialData?.image || ""}
                aspectRatio="video"
@@ -154,7 +154,7 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
            className="w-full sm:w-auto h-14 px-10 border border-stroke rounded-xl text-[10px] font-brand tracking-widest hover:bg-surface transition-all flex items-center justify-center gap-3"
          >
             <X size={16} />
-            ABORT BROADCAST
+            CANCEL
          </button>
          <button 
            type="submit" 
@@ -162,7 +162,7 @@ export default function BlogForm({ initialData, categories, authors }: BlogFormP
            className="w-full sm:w-auto h-14 px-12 bg-brand text-white rounded-xl text-[10px] font-brand tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/10 flex items-center justify-center gap-3 disabled:opacity-50"
          >
             <Save size={16} />
-            {isSubmitting ? "SYNCHRONIZING..." : "COMMIT INTEL"}
+            {isSubmitting ? "SAVING..." : "SAVE POST"}
          </button>
       </div>
     </motion.form>

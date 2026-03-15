@@ -12,8 +12,8 @@ export default async function AdminApplicationsPage() {
     <div className="space-y-12">
       <div className="flex justify-between items-end">
          <div className="space-y-4">
-            <h1 className="text-4xl font-black uppercase tracking-tighter text-text-primary">TALENT <span className="text-brand">REVIEW.</span></h1>
-            <p className="text-text-muted text-[10px] font-black uppercase tracking-widest">MANAGE INSTITUTIONAL GROWTH AND ACQUISITION NODES</p>
+            <h1 className="text-4xl font-black uppercase tracking-tighter text-text-primary">JOB <span className="text-brand">APPLICATIONS.</span></h1>
+            <p className="text-text-muted text-[10px] font-black uppercase tracking-widest">REVIEW AND MANAGE INCOMING TALENT APPLICATIONS</p>
          </div>
       </div>
 
@@ -21,9 +21,9 @@ export default async function AdminApplicationsPage() {
          <table className="w-full text-left border-collapse">
             <thead>
                <tr className="border-b border-stroke bg-surface/50">
-                  <th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-text-muted">Applicant / Contact</th>
-                  <th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-text-muted">Target Position</th>
-                  <th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-text-muted">Credentials</th>
+                  <th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-text-muted">Applicant</th>
+                  <th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-text-muted">Position</th>
+                  <th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-text-muted">Documents</th>
                   <th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-text-muted text-right">Actions</th>
                </tr>
             </thead>
@@ -87,7 +87,7 @@ export default async function AdminApplicationsPage() {
          
          {applications.length === 0 && (
             <div className="py-20 text-center space-y-4">
-               <p className="text-[10px] font-black uppercase tracking-widest text-text-muted">No talent acquisition requests detected in review board.</p>
+               <p className="text-[10px] font-black uppercase tracking-widest text-text-muted">No applications found.</p>
             </div>
          )}
       </div>

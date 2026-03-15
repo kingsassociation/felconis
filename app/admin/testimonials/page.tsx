@@ -10,28 +10,28 @@ export default async function AdminTestimonialsPage() {
   return (
     <div className="space-y-12">
       <div className="flex justify-between items-end">
-         <div className="space-y-4">
-            <h1 className="text-4xl font-black uppercase tracking-tighter text-text-primary">EXPERIENCE <span className="text-brand">RECORDS.</span></h1>
-            <p className="text-text-muted text-[10px] font-black uppercase tracking-widest">MANAGE INSTITUTIONAL CREDIBILITY AND TESTIMONIALS</p>
+         <div className="space-y-2">
+            <h1 className="text-3xl font-brand tracking-tight text-text-primary uppercase leading-tight">Testimonials</h1>
+            <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest">Manage client feedback</p>
          </div>
-         <Link href="/admin/testimonials/new" className="h-12 px-8 bg-brand text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-opacity flex items-center gap-3 shadow-lg shadow-brand/10">
-            <Plus size={16} /> Record Experience
+         <Link href="/admin/testimonials/new" className="h-10 px-6 bg-brand text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+            <Plus size={14} /> Add Testimonial
          </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
          {testimonials.map((test: any) => (
-            <div key={test.id} className="bg-white border border-stroke rounded-2xl p-8 space-y-6 group hover:border-brand/40 transition-all shadow-sm">
+            <div key={test.id} className="bg-white border border-stroke rounded-3xl p-8 space-y-6 group hover:border-brand/40 transition-all shadow-sm">
                <div className="flex justify-between items-start">
-                  <div className="w-12 h-12 rounded-xl bg-brand/5 flex items-center justify-center text-brand">
-                     <Quote size={20} />
+                  <div className="w-10 h-10 rounded-lg bg-brand/5 flex items-center justify-center text-brand">
+                     <Quote size={18} />
                   </div>
-                  <div className="flex gap-4">
-                     <Link href={`/admin/testimonials/${test.id}`} className="h-10 px-6 border border-stroke rounded-lg text-[9px] font-black uppercase tracking-widest text-text-muted hover:border-brand/40 hover:text-brand transition-all flex items-center justify-center">
-                        EDIT
+                  <div className="flex gap-3">
+                     <Link href={`/admin/testimonials/${test.id}`} className="h-9 px-4 border border-stroke rounded-lg text-[9px] font-bold uppercase tracking-widest text-text-muted hover:border-brand/40 hover:text-brand transition-all flex items-center justify-center">
+                        Edit
                      </Link>
                      <form action={deleteTestimonial.bind(null, test.id)}>
-                        <button className="w-10 h-10 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center">
+                        <button className="w-9 h-9 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center">
                            <Trash2 size={16} />
                         </button>
                      </form>
@@ -45,17 +45,23 @@ export default async function AdminTestimonialsPage() {
                       {test.photo ? (
                         <img src={getCloudinaryUrl(test.photo)} alt={test.name} className="w-full h-full object-cover" />
                       ) : (
-                        test.name[0]
+                        test.name?.[0] || '?'
                       )}
                    </div>
                   <div>
-                     <p className="text-xs font-black uppercase tracking-tight text-text-primary">{test.name}</p>
-                     <p className="text-[9px] font-black uppercase tracking-widest text-text-muted">{test.designation || test.company}</p>
+                     <p className="text-xs font-bold uppercase tracking-tight text-text-primary">{test.name}</p>
+                     <p className="text-[9px] font-bold uppercase tracking-widest text-text-muted">{test.designation || test.company}</p>
                   </div>
                </div>
             </div>
          ))}
       </div>
+
+      {testimonials.length === 0 && (
+        <div className="py-20 text-center">
+           <p className="text-[10px] font-brand tracking-widest text-text-muted">No testimonials found.</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
     const content = post.content;
     const simpleHeadingRegex = /<h([23])(?![^>]*id=)([^>]*)>(.*?)<\/h\1>/gi;
     let i = 0;
-    
+
     // Inject IDs into headings that don't have them
     return content.replace(simpleHeadingRegex, (match: string, level: string, attrs: string, text: string) => {
       const id = `section-${i++}`;
@@ -52,7 +52,7 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
     const headings: ToCItem[] = [];
     const headingRegex = /<h([23])[^>]*id="([^"]+)"[^>]*>(.*?)<\/h\1>/gi;
     let match;
-    
+
     while ((match = headingRegex.exec(processedContent)) !== null) {
       headings.push({
         level: parseInt(match[1]),
@@ -66,7 +66,7 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
 
   useEffect(() => {
     if (window.fbq && localStorage.getItem('felconis_cookie_consent') === 'allowed') {
-      window.fbq('track', 'ViewContent', { 
+      window.fbq('track', 'ViewContent', {
         content_name: post.title,
         content_category: isPremium ? 'Institutional Authority' : 'Institutional Insight',
         content_ids: [slug]
@@ -93,15 +93,14 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
     <div className="min-h-screen bg-white text-text-primary">
       <Navbar />
 
-      <main className={`grain ${isPremium ? "" : "py-20"}`}>
+      <main className="grain pt-4 md:pt-8 min-h-screen">
         {/* HERO SECTION */}
         {isPremium ? (
-          /* AUTHORITY HERO SECTION */
-          <section className="relative pt-32 pb-20 border-b border-stroke overflow-hidden">
+          <section className="relative py-4 md:py-8 md:pb-20 overflow-hidden border-b border-stroke">
             <div className="absolute inset-0 bg-gradient-to-b from-brand/[0.02] to-transparent -z-10" />
             <div className="container-max relative">
-              <div className="max-w-4xl mx-auto text-center space-y-8">
-                <motion.div 
+              <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="inline-flex items-center gap-2 px-3 py-1 bg-brand/10 border border-brand/20 rounded-full"
@@ -110,55 +109,55 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
                   <span className="text-[10px] font-black uppercase tracking-widest text-brand">Institutional Authority Page</span>
                 </motion.div>
 
-                <motion.h1 
+                <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1, duration: 0.8 }}
-                  className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] uppercase"
+                  className="text-4xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] uppercase"
                 >
                   {post.title}
                 </motion.h1>
 
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
-                  className="text-text-secondary text-lg md:text-xl font-medium max-w-2xl mx-auto"
+                  className="text-text-secondary text-base md:text-xl font-medium max-w-2xl mx-auto"
                 >
                   Comprehensive analysis and strategic rankings for the 2026 digital landscape.
                 </motion.p>
 
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="flex flex-wrap items-center justify-center gap-8 pt-8"
+                  className="flex flex-wrap items-center justify-center gap-6 md:gap-8 pt-6 md:pt-8"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-surface border border-stroke flex items-center justify-center text-brand">
-                      <User size={16} />
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-surface border border-stroke flex items-center justify-center text-brand">
+                      <User size={14} className="md:w-4 md:h-4" />
                     </div>
                     <div className="text-left">
-                      <p className="text-[9px] font-black uppercase tracking-widest text-text-muted">Principal Architect</p>
-                      <p className="text-[11px] font-bold uppercase">{post.author}</p>
+                      <p className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-text-muted">Principal Architect</p>
+                      <p className="text-[10px] md:text-[11px] font-bold uppercase">{post.author}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-surface border border-stroke flex items-center justify-center text-brand">
-                      <Calendar size={16} />
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-surface border border-stroke flex items-center justify-center text-brand">
+                      <Calendar size={14} className="md:w-4 md:h-4" />
                     </div>
                     <div className="text-left">
-                      <p className="text-[9px] font-black uppercase tracking-widest text-text-muted">Last Verified</p>
-                      <p className="text-[11px] font-bold uppercase">{post.date}</p>
+                      <p className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-text-muted">Last Verified</p>
+                      <p className="text-[10px] md:text-[11px] font-bold uppercase">{post.date}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
-                      <CheckCircle2 size={16} />
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
+                      <CheckCircle2 size={14} className="md:w-4 md:h-4" />
                     </div>
                     <div className="text-left">
-                      <p className="text-[9px] font-black uppercase tracking-widest text-text-muted">Status</p>
-                      <p className="text-[11px] font-bold uppercase text-brand">Verified Authority</p>
+                      <p className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-text-muted">Status</p>
+                      <p className="text-[10px] md:text-[11px] font-bold uppercase text-brand">Verified Authority</p>
                     </div>
                   </div>
                 </motion.div>
@@ -168,84 +167,84 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
         ) : (
           /* STANDARD IMPACT HERO SECTION */
           <div className="container-max">
-            <header className="max-w-4xl mx-auto mb-20 text-center">
-               <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="inline-flex items-center gap-2 px-3 py-1 bg-brand/5 border border-brand/10 rounded-md mb-12"
-               >
-                  <div className="w-1 h-1 bg-brand rounded-full" />
-                  <span className="text-[10px] font-black uppercase tracking-widest text-brand">Institutional Intelligence</span>
-               </motion.div>
+            <header className="max-w-4xl mx-auto mb-10 md:mb-20 text-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="inline-flex items-center gap-2 px-3 py-1 bg-brand/5 border border-brand/10 rounded-md mb-8 md:mb-12"
+              >
+                <div className="w-1 h-1 bg-brand rounded-full" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-brand">Institutional Intelligence</span>
+              </motion.div>
 
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.8 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-black mb-12 tracking-tighter leading-[0.9] uppercase text-text-primary"
+                className="text-4xl md:text-7xl lg:text-8xl font-black mb-8 md:mb-12 tracking-tighter leading-[0.9] uppercase text-text-primary"
               >
                 {post.title}
               </motion.h1>
-              
-              <motion.div 
+
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="flex items-center justify-center gap-12 mb-20"
+                className="flex items-center justify-center gap-6 md:gap-12 mb-10 md:mb-20"
               >
-                 <div className="flex items-center gap-4 text-left">
-                    <div className="w-12 h-12 rounded-xl bg-surface border border-stroke flex items-center justify-center text-brand">
-                       <User size={20} />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-text-primary leading-none mb-1.5">{post.author}</p>
-                      <p className="text-[9px] font-black uppercase tracking-widest text-text-muted">Principal Architect</p>
-                    </div>
-                 </div>
-                 <div className="flex items-center gap-4 text-left">
-                    <div className="w-12 h-12 rounded-xl bg-surface border border-stroke flex items-center justify-center text-brand">
-                       <Calendar size={20} />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-text-primary leading-none mb-1.5">{post.date}</p>
-                      <p className="text-[9px] font-black uppercase tracking-widest text-text-muted">Audit Timestamp</p>
-                    </div>
-                 </div>
+                <div className="flex items-center gap-3 md:gap-4 text-left">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-surface border border-stroke flex items-center justify-center text-brand">
+                    <User size={18} className="md:w-5 md:h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-text-primary leading-none mb-1 md:mb-1.5">{post.author}</p>
+                    <p className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-text-muted">Principal Architect</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 md:gap-4 text-left">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-surface border border-stroke flex items-center justify-center text-brand">
+                    <Calendar size={18} className="md:w-5 md:h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-text-primary leading-none mb-1 md:mb-1.5">{post.date}</p>
+                    <p className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-text-muted">Audit Timestamp</p>
+                  </div>
+                </div>
               </motion.div>
             </header>
           </div>
         )}
 
         {/* FEATURED ASSET */}
-        <div className={`container-max ${isPremium ? "-mt-10 mb-20" : "mb-20"} relative z-10`}>
-          <motion.div 
+        <div className={`container-max ${isPremium ? "-mt-6 md:-mt-10 mb-10 md:mb-20" : "mb-10 md:mb-20"} relative z-10`}>
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className={`rounded-3xl overflow-hidden border border-stroke shadow-2xl relative group ${isPremium ? "aspect-[21/9]" : "aspect-[4/3] md:aspect-[21/9]"}`}
+            className={`rounded-2xl md:rounded-3xl overflow-hidden border border-stroke shadow-2xl relative group ${isPremium ? "aspect-[21/9]" : "aspect-[4/3] md:aspect-[21/9]"}`}
           >
-            <img 
-              src={getCloudinaryUrl(post.image)} 
-              alt={post.title} 
-              className={`w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ${isPremium ? "opacity-40 group-hover:opacity-100" : "opacity-20 group-hover:opacity-100"}`} 
+            <img
+              src={getCloudinaryUrl(post.image)}
+              alt={post.title}
+              className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ${isPremium ? "opacity-60 md:opacity-40 group-hover:opacity-100" : "opacity-90 md:opacity-20 group-hover:opacity-100"}`}
             />
             <div className={`absolute inset-0 ${isPremium ? "bg-gradient-to-t from-black/20 to-transparent" : "bg-brand/[0.01]"} pointer-events-none`} />
           </motion.div>
         </div>
 
         {/* ARTICLE CONTENT */}
-        <section className={isPremium ? "section-padding" : ""}>
+        <section className={isPremium ? "py-12 md:py-20" : ""}>
           <div className="container-max">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-20 items-start">
               {/* STICKY NAV / SIDEBAR */}
-              <aside className="lg:col-span-3 lg:sticky top-[calc(var(--navbar-offset)+2rem)] h-fit space-y-12 order-2 lg:order-1 transition-all duration-300">
-                <div className="p-8 bg-surface border border-stroke rounded-2xl space-y-6">
+              <aside className="lg:col-span-3 lg:sticky top-[calc(var(--navbar-offset)+1rem)] md:top-[calc(var(--navbar-offset)+2rem)] h-fit space-y-8 md:space-y-12 order-2 lg:order-1 transition-all duration-300">
+                <div className="p-6 md:p-8 bg-surface border border-stroke rounded-2xl space-y-4 md:space-y-6">
                   <h4 className="text-[10px] font-black uppercase tracking-widest text-brand border-b border-stroke pb-4">On This Page</h4>
                   <nav className="space-y-4">
                     {toc.length > 0 ? (
                       toc.map((item) => (
-                        <a 
-                          key={item.id} 
+                        <a
+                          key={item.id}
                           href={`#${item.id}`}
                           className={`block text-[10px] font-bold uppercase tracking-widest transition-colors ${activeHash === `#${item.id}` ? "text-brand" : "text-text-muted hover:text-brand"} ${item.level === 3 ? "ml-4 text-[9px]" : ""}`}
                         >
@@ -258,17 +257,17 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
                   </nav>
                 </div>
 
-                <div className="p-8 bg-brand rounded-2xl text-white space-y-6 shadow-xl shadow-brand/20">
-                   <Share2 size={24} />
-                   <h4 className="text-xl font-black uppercase leading-tight">SHARE THIS <br /> INTELLIGENCE.</h4>
-                   <p className="text-white/70 text-[10px] font-bold uppercase tracking-widest">Distribute these strategic findings across your organization.</p>
-                   <button 
-                     onClick={handleCopyUrl}
-                     className="w-full h-12 bg-white text-brand rounded-xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-2"
-                   >
-                     <Share2 size={12} />
-                     Copy URL
-                   </button>
+                <div className="p-6 md:p-8 bg-brand rounded-2xl text-white space-y-4 md:space-y-6 shadow-xl shadow-brand/20">
+                  <Share2 size={24} />
+                  <h4 className="text-lg md:text-xl font-black uppercase leading-tight">SHARE THIS <br /> INTELLIGENCE.</h4>
+                  <p className="text-white/70 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">Distribute these strategic findings across your organization.</p>
+                  <button
+                    onClick={handleCopyUrl}
+                    className="w-full h-12 bg-white text-brand rounded-xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                  >
+                    <Share2 size={12} />
+                    Copy URL
+                  </button>
                 </div>
               </aside>
 
@@ -280,7 +279,7 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
                   ${isPremium ? "prose-brand prose-p:text-text-secondary prose-p:leading-relaxed prose-p:font-medium authority-content" : "prose-gray prose-p:text-gray-800 prose-p:leading-[1.8] prose-p:font-medium drop-cap"}
                   ${isPremium ? "prose-table:border prose-table:border-stroke prose-thead:bg-surface prose-th:p-4 prose-th:text-[10px] prose-th:font-black prose-th:uppercase prose-th:tracking-widest prose-td:p-4 prose-td:text-sm prose-td:border-t prose-td:border-stroke" : ""}
                 `}>
-                  <div 
+                  <div
                     dangerouslySetInnerHTML={{ __html: processedContent }}
                     className={isPremium ? "" : "space-y-12"}
                   />
@@ -296,9 +295,9 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
 
                 {/* BOTTOM CTA */}
                 {isPremium && (
-                  <div className="mt-20 p-12 bg-surface border border-stroke rounded-3xl text-center space-y-8">
-                    <h3 className="text-3xl font-black uppercase tracking-tighter">Ready to Scale Your Infrastructure?</h3>
-                    <p className="text-text-secondary max-w-xl mx-auto font-medium">
+                  <div className="mt-12 md:mt-20 p-8 md:p-12 bg-surface border border-stroke rounded-2xl md:rounded-3xl text-center space-y-6 md:space-y-8">
+                    <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter">Ready to Scale Your Infrastructure?</h3>
+                    <p className="text-text-secondary max-w-xl mx-auto text-sm md:text-base font-medium">
                       Discuss your organizational objectives with our principal architects and deploy high-performance engineering teams.
                     </p>
                     <div className="flex justify-center">
@@ -315,7 +314,7 @@ export default function BlogContent({ slug, post }: BlogContentProps) {
       </main>
 
       <Footer />
-      
+
       <style jsx global>{`
         .authority-content h2 { border-left: 4px solid var(--brand); padding-left: 1.5rem; font-size: 2.5rem; }
         .authority-content h3 { font-size: 1.5rem; color: var(--brand); }

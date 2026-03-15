@@ -11,66 +11,66 @@ export default async function AdminCareersPage() {
   return (
     <div className="space-y-12">
       <div className="flex justify-between items-end">
-         <div className="space-y-4">
-            <h1 className="text-4xl font-brand tracking-tight text-text-primary uppercase leading-tight">TALENT <span className="text-brand">NODES.</span></h1>
-            <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest bg-surface px-4 py-2 border border-stroke rounded-lg inline-block">MANAGE INSTITUTIONAL GROWTH AND ACQUISITION</p>
+         <div className="space-y-2">
+            <h1 className="text-3xl font-brand tracking-tight text-text-primary uppercase leading-tight">Careers</h1>
+            <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest">Manage job openings</p>
          </div>
          <Link 
             href="/admin/careers/new" 
-            className="h-12 px-8 bg-brand text-white rounded-xl text-[10px] font-brand tracking-widest hover:opacity-90 transition-opacity shadow-lg shadow-brand/10 flex items-center gap-3"
+            className="h-10 px-6 bg-brand text-white rounded-lg text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center gap-2"
          >
-            <Plus size={16} />
-            DEPLOY NEW NODE
+            <Plus size={14} />
+            Post Job
          </Link>
       </div>
 
-      <div className="bg-white rounded-[2rem] border border-stroke overflow-x-auto shadow-sm">
+      <div className="bg-white rounded-3xl border border-stroke overflow-x-auto shadow-sm">
          <table className="w-full text-left border-collapse">
             <thead>
                <tr className="border-b border-stroke bg-surface/50 text-[10px] font-brand tracking-widest text-text-muted">
-                  <th className="px-10 py-6 text-left">POSITION / DEPARTMENT</th>
-                  <th className="px-10 py-6 text-left">LOCATION</th>
-                  <th className="px-10 py-6 text-left">NODE STATUS</th>
-                  <th className="px-10 py-6 text-right pr-12">ACTIONS</th>
+                  <th className="px-8 py-4 text-left">Position</th>
+                  <th className="px-8 py-4 text-left">Location</th>
+                  <th className="px-8 py-4 text-left">Status</th>
+                  <th className="px-8 py-4 text-right pr-10">Actions</th>
                </tr>
             </thead>
             <tbody className="divide-y divide-stroke">
                {jobs.map((job: any) => (
                   <tr key={job.id} className="group hover:bg-surface transition-colors">
-                     <td className="px-10 py-8">
-                        <div className="flex items-center gap-6">
-                           <div className="w-12 h-12 rounded-xl bg-brand/5 border border-brand/10 flex items-center justify-center text-brand">
-                              <Users size={24} />
+                     <td className="px-8 py-6">
+                        <div className="flex items-center gap-4">
+                           <div className="w-10 h-10 rounded-lg bg-brand/5 border border-brand/10 flex items-center justify-center text-brand">
+                              <Users size={20} />
                            </div>
                            <div>
-                              <p className="text-sm font-bold uppercase tracking-tight text-text-primary group-hover:text-brand transition-colors">{job.title}</p>
-                              <p className="text-[10px] font-brand tracking-widest text-text-muted line-clamp-1 max-w-xs">{job.department}</p>
+                              <p className="text-xs font-bold uppercase tracking-tight text-text-primary group-hover:text-brand transition-colors">{job.title}</p>
+                              <p className="text-[9px] font-brand tracking-widest text-text-muted line-clamp-1 max-w-xs">{job.department}</p>
                            </div>
                         </div>
                      </td>
-                     <td className="px-10 py-8 text-[10px] font-bold uppercase tracking-widest text-text-muted">
+                     <td className="px-8 py-6 text-[9px] font-bold uppercase tracking-widest text-text-muted">
                         {job.location}
                      </td>
-                     <td className="px-10 py-8">
-                        <span className={`px-4 py-1.5 border rounded-lg text-[9px] font-brand tracking-widest ${
+                     <td className="px-8 py-6">
+                        <span className={`px-3 py-1 border rounded-md text-[8px] font-bold uppercase tracking-widest ${
                            job.active 
                            ? "bg-emerald-50 border-emerald-100 text-emerald-600" 
                            : "bg-red-50 border-red-100 text-red-600"
                         }`}>
-                           {job.active ? "ACTIVE NODE" : "INACTIVE NODE"}
+                           {job.active ? "Active" : "Inactive"}
                         </span>
                      </td>
-                     <td className="px-10 py-8 text-right pr-12">
-                        <div className="flex justify-end gap-4">
+                     <td className="px-8 py-6 text-right pr-10">
+                        <div className="flex justify-end gap-3">
                            <Link 
                              href={`/admin/careers/${job.id}`}
-                             className="h-10 px-6 border border-stroke rounded-lg text-[9px] font-brand tracking-widest hover:border-brand/40 transition-colors bg-white flex items-center"
+                             className="h-9 px-4 border border-stroke rounded-lg text-[9px] font-bold uppercase tracking-widest hover:border-brand/40 transition-colors bg-white flex items-center"
                            >
-                              CONFIGURE
+                              Edit
                            </Link>
                            <form action={deleteJob.bind(null, job.id)}>
-                              <button className="w-10 h-10 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center">
-                                 <Trash2 size={16} />
+                              <button className="w-9 h-9 border border-stroke rounded-lg text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center">
+                                 <Trash2 size={14} />
                               </button>
                            </form>
                         </div>
@@ -81,8 +81,8 @@ export default async function AdminCareersPage() {
          </table>
          
          {jobs.length === 0 && (
-            <div className="py-20 text-center space-y-4">
-               <p className="text-[10px] font-bold uppercase tracking-widest text-text-muted">No talent nodes detected in board.</p>
+            <div className="py-20 text-center">
+               <p className="text-[10px] font-brand tracking-widest text-text-muted">No jobs found.</p>
             </div>
          )}
       </div>

@@ -38,12 +38,12 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
          <div className="space-y-4">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Node Title</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Service Title</label>
             <input 
               name="title" 
               defaultValue={initialData?.title} 
               required
-              placeholder="E.G. GROWTH ENGINE"
+              placeholder="E.G. GROWTH MARKETING"
               className="w-full h-14 bg-surface border border-stroke rounded-xl px-6 text-[11px] font-black uppercase tracking-widest focus:border-brand outline-none transition-all"
             />
          </div>
@@ -53,21 +53,21 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
               name="slug" 
               defaultValue={initialData?.slug} 
               required
-              placeholder="E.G. GROWTH-ENGINE"
+              placeholder="E.G. growth-marketing"
               className="w-full h-14 bg-surface border border-stroke rounded-xl px-6 text-[11px] font-black uppercase tracking-widest focus:border-brand outline-none transition-all"
             />
          </div>
          <div className="space-y-4 md:col-span-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Subtitle / Signal</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Tagline / Subtitle</label>
             <input 
               name="subtitle" 
               defaultValue={initialData?.subtitle} 
-              placeholder="E.G. HIGH-VELOCITY ACQUISITION INFRASTRUCTURE"
+              placeholder="E.G. HIGH-VELOCITY GROWTH ARCHITECTURE"
               className="w-full h-14 bg-surface border border-stroke rounded-xl px-6 text-[11px] font-black uppercase tracking-widest focus:border-brand outline-none transition-all"
             />
          </div>
          <div className="space-y-4 md:col-span-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Strategic Overview</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Description</label>
             <textarea 
               name="description" 
               defaultValue={initialData?.description} 
@@ -77,7 +77,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             />
          </div>
          <div className="space-y-4">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Sector / Category</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Category</label>
             <select 
               name="category" 
               defaultValue={initialData?.category || "MARKETING"}
@@ -89,7 +89,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             </select>
          </div>
          <div className="space-y-4">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Signal Icon (Lucide)</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Icon Name (Lucide)</label>
             <input 
               name="icon" 
               defaultValue={initialData?.icon} 
@@ -99,14 +99,14 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
          </div>
          <div className="space-y-4 md:col-span-2">
             <CloudinaryAssetInput 
-              label="Primary Visual Asset (Cloud URL)"
+              label="Primary Image (Cloudinary URL)"
               name="image"
               defaultValue={initialData?.image || ""}
               aspectRatio="video"
             />
          </div>
          <div className="space-y-4 md:col-span-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Core Features (Comma Separated)</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Features (Comma Separated)</label>
             <input 
               name="features" 
               defaultValue={initialData?.features?.join(", ")} 
@@ -114,7 +114,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
             />
          </div>
          <div className="space-y-4 md:col-span-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Institutional Highlights (JSON)</label>
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Highlights (JSON)</label>
             <textarea 
               name="highlights" 
               defaultValue={JSON.stringify(initialData?.highlights || [], null, 2)} 
@@ -131,7 +131,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
            className="h-14 px-10 border border-stroke rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-surface transition-all flex items-center gap-3"
          >
             <X size={16} />
-            ABORT MISSION
+            CANCEL
          </button>
          <button 
            type="submit" 
@@ -139,7 +139,7 @@ export default function ServiceForm({ initialData }: ServiceFormProps) {
            className="h-14 px-12 bg-brand text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/10 flex items-center gap-3 disabled:opacity-50"
          >
             <Save size={16} />
-            {isSubmitting ? "DEPLOYING..." : "COMMIT CHANGES"}
+            {isSubmitting ? "SAVING..." : "SAVE SERVICE"}
          </button>
       </div>
     </motion.form>

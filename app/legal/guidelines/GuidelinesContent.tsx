@@ -13,36 +13,36 @@ export default function GuidelinesContent() {
           <section className="space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand/5 border border-brand/10 rounded-md">
               <Handshake size={14} className="text-brand" />
-              <p className="text-[10px] font-bold uppercase tracking-widest text-brand">Institutional Protocol</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-brand">Partner Network</p>
             </div>
             <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight leading-[0.9]">
-              PARTNER <br /> <span className="text-brand">GUIDELINES.</span>
+              NETWORK <br /> <span className="text-brand">GUIDELINES.</span>
             </h1>
             <p className="text-text-secondary text-lg font-medium leading-relaxed border-l-2 border-brand/20 pl-6">
-              The Felconis Partner Network is architected for professionals who prioritize technical integrity and industrial growth. This code of conduct ensures absolute strategic alignment across our global ecosystem.
+              The Felconis Partner Network is designed for professionals who prioritize quality and growth. This code of conduct ensures alignment across our global community.
             </p>
           </section>
 
           <div className="space-y-12 text-text-muted font-medium leading-relaxed">
-            <LegalSection 
-                title="1. TECHNICAL INTEGRITY" 
-                content="Partners are the primary emissaries of the Felconis technical authority. All strategic recommendations and engineered solutions must adhere to our zero-compromise quality standard. Misrepresenting technical capability is considered a protocol breach."
+            <LegalSection
+              title="1. QUALITY STANDARDS"
+              content="Partners are the primary representatives of Felconis. All recommendations and solutions must adhere to our zero-compromise quality standard. Misrepresenting capabilities is considered a breach of trust."
             />
-            <LegalSection 
-                title="2. ROI GOVERNANCE" 
-                content="The Felconis Partner Network is architected for value extraction. Partners must prioritize client ROI and organizational objective alignment in every consultative diagnostic. Success is measured by the delta in institutional performance."
+            <LegalSection
+              title="2. CLIENT SUCCESS"
+              content="Our network is built for delivering value. Partners must prioritize client success and business objectives in every consultation. Success is measured by the improvement in client performance."
             />
-            <LegalSection 
-                title="3. AUDIENCE SIGNAL AUTHENTICITY" 
-                content="Engagement with market signals must be authentic and high-authority. We forbid the use of low-intent acquisition tactics or automated engagement signals that degrade the institutional trust of our global partners."
+            <LegalSection
+              title="3. AUTHENTIC ENGAGEMENT"
+              content="Marketing and engagement must be authentic. We forbid the use of low-quality tactics or automated signals that degrade trust with our global partners."
             />
-            <LegalSection 
-                title="4. REGISTRATION ACTIVATION" 
-                content="Active network status requires the successful completion of annual protocol activations (7,000 BDT) and adherence to continuous professional development modules as defined by the steering committee."
+            <LegalSection
+              title="4. ACCOUNT ACTIVATION"
+              content="Active status requires a successful account setup and adherence to continuous professional development as defined by the community."
             />
-            <LegalSection 
-                title="5. CONFIDENTIALITY PROTOCOL" 
-                content="Partners may be granted access to sensitive client infrastructure and proprietary Felconis growth logic. Absolute confidentiality regarding architectural details and strategic intent is a permanent requirement."
+            <LegalSection
+              title="5. CONFIDENTIALITY"
+              content="Partners may be granted access to sensitive client information and proprietary Felconis strategies. Absolute confidentiality regarding all project details is a permanent requirement."
             />
           </div>
         </div>
