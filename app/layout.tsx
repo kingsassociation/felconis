@@ -3,6 +3,7 @@ import { Public_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 import CookieConsent from "./components/CookieConsent";
 import FacebookPixel from "./components/FacebookPixel";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import "./globals.css";
 
 const publicSans = Public_Sans({
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     default: "Felconis | Institutional Digital Engineering",
     template: "%s | Felconis"
   },
-  description: "Global digital engineering firm specializing in high-precision software systems and strategic organizational scaling.",
+  description: "Software company offering custom software development, web applications, SaaS solutions and scalable digital systems for startups and growing business.",
   keywords: ["digital engineering", "software systems", "strategic scaling", "enterprise software", "institutional engineering"],
   authors: [{ name: "Felconis Team" }],
   creator: "Felconis",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     url: baseUrl,
     siteName: "Felconis",
     title: "Felconis | Institutional Digital Engineering",
-    description: "Global digital engineering firm specializing in high-precision software systems and strategic organizational scaling.",
+    description: "Software company offering custom software development, web applications, SaaS solutions and scalable digital systems for startups and growing business.",
     images: [
       {
         url: "/logo.png",
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Felconis | Institutional Digital Engineering",
-    description: "Global digital engineering firm specializing in high-precision software systems and strategic organizational scaling.",
+    description: "Software company offering custom software development, web applications, SaaS solutions and scalable digital systems for startups and growing business.",
     images: ["/logo.png"],
     creator: "@felconis",
   },
@@ -85,6 +86,7 @@ export default function RootLayout({
       >
         <Toaster position="top-center" expand visibleToasts={3} richColors />
         <FacebookPixel />
+        <GoogleAnalytics />
         <CookieConsent />
         {children}
       </body>

@@ -19,9 +19,18 @@ export default function CookieConsent() {
   const handleConsent = (agreed: boolean) => {
     localStorage.setItem("felconis_cookie_consent", agreed ? "allowed" : "declined");
 
-    // Trigger Facebook Pixel if agreed
-    if (agreed && window.fbq) {
-      window.fbq('track', 'PageView');
+    // Trigger Analytics if agreed
+    if (agreed) {
+      if (window.fbq) {
+        window.fbq('track', 'PageView');
+      }
+      if (window.gtag) {
+        window.gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'analytics_storage': 'granted'
+        });
+        window.gtag('event', 'page_view');
+      }
     }
 
     setIsVisible(false);
